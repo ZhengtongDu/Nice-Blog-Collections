@@ -341,10 +341,11 @@ class TranslationJob:
             if index != 1 and index != total:
                 instructions.append("这是文章的中间部分，不需要添加著作权声明、摘要或译者总结。")
 
+            instructions_text = '\n'.join(instructions)
             user_prompt = (
                 "请按照系统提示中的规则润色以下章节。\n\n"
                 f"## 文章元数据\n{meta_header}\n\n"
-                f"## 位置说明\n{'\n'.join(instructions)}\n\n"
+                f"## 位置说明\n{instructions_text}\n\n"
                 f"## 英文原文\n{original_section.strip()}\n\n"
                 f"## Google Translate 机翻结果\n{translated_section.strip()}\n\n"
                 "请输出润色后的内容（Markdown 格式）："

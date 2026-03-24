@@ -1,40 +1,41 @@
 # CLAUDE.md
+<!-- 内容与 AGENTS.md 保持同步 -->
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 仓库用途
+博文翻译助手 — 英文博客 AI 翻译管线 + 微信公众号发布工具。
 
-收集优质英文博客原文，通过自动化 AI 管线翻译为微信公众号文章（Markdown 格式）。
+## 快速参考
 
-## 目录约定
+- 翻译文章：`conda run -n vx-blog python src/translate.py <URL>`
+- SwiftUI app：`swift run BlogTranslatorApp`
+- 构建并安装 .app：`./build_swiftui_app.sh`（自动安装到 /Applications）
+- 测试：`swift test` / `conda run -n vx-blog python -m unittest discover -s tests -v`
 
-- `articles/{添加日期}-{slug}/` — 每篇文章一个文件夹
-  - `metadata.yaml` — 元数据（标题、作者、原文日期、来源 URL、标签、状态）
-  - `original.md` — 英文原文（Markdown）
-  - `translated.md` — 中文翻译（微信公众号 Markdown）
-- `src/` — 自动化翻译管线代码
-  - `translate.py` — 管线入口脚本
-  - `config.py` — Ollama / 翻译配置
-  - `prompts/polish_prompt.md` — 模型润色规则
+## Python 环境
 
-## 翻译管线
+- 使用 conda 环境 `vx-blog`（`~/miniconda3/envs/vx-blog`）
+- 安装依赖：`conda run -n vx-blog pip install -r requirements.txt`
+- .app bundle 内嵌 `launch_worker.sh`，硬编码 conda python 路径
 
-```bash
-python src/translate.py <URL>
-```
+## 工作流约定
 
-流程：爬取 → 清洗为 Markdown → Google Translate 按段翻译 → Ollama qwen3.5:9b 润色排版 → 输出 translated.md
+- 修改 Python 或 Swift 代码后，执行 `./build_swiftui_app.sh` 重新构建并安装 .app
 
-## metadata.yaml status 字段
+## 知识文件索引
 
-- `pending` — 待翻译
-- `translated` — 已翻译
-- `published` — 已发布到公众号
+根据当前任务按需加载：
 
-## 依赖
+| 文件 | 何时加载 | 内容 |
+|------|----------|------|
+| `.claude/docs/conventions.md` | 处理文章、metadata、目录结构时 | 目录命名、metadata schema、文件约定 |
+| `.claude/docs/architecture.md` | 修改 Python 或 Swift 代码时 | 系统架构、组件职责、管线流程、配置 |
+| `.claude/docs/worker-protocol.md` | 修改 SwiftUI↔Python 通信时 | Worker JSON-lines IPC 协议参考 |
+| `src/prompts/polish_prompt.md` | 调整润色效果时 | Ollama 润色排版规则（运行时加载） |
+| `README.md` | 安装、使用、故障排除 | 用户文档 |
 
-```bash
-pip install -r requirements.txt
-```
+## 关键约定
 
-需要本地运行 Ollama 并拉取模型：`ollama pull qwen3.5:9b`
+- metadata status 生命周期：`pending` → `translated` → `published`
+- 中文与英文/数字之间加空格
+- `log/` = 项目复盘（版本控制），`logs/` = 运行时日志（gitignore）

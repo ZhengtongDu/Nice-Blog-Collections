@@ -47,6 +47,18 @@ mkdir -p "$MACOS_DIR" "$RESOURCES_DIR" "$WORKER_DIR"
 cp "$EXECUTABLE" "$MACOS_DIR/$APP_NAME"
 cp -R "$ROOT_DIR/src" "$WORKER_DIR/"
 
+# Embed a launcher script that activates the conda environment.
+CONDA_PYTHON="$HOME/miniconda3/envs/vx-blog/bin/python"
+if [[ ! -f "$CONDA_PYTHON" ]]; then
+  echo "Warning: conda env vx-blog not found at $CONDA_PYTHON" >&2
+fi
+
+cat > "$WORKER_DIR/launch_worker.sh" <<LAUNCHER
+#!/bin/zsh
+exec "$CONDA_PYTHON" "\$(dirname "\$0")/src/worker/main.py"
+LAUNCHER
+chmod +x "$WORKER_DIR/launch_worker.sh"
+
 if [[ -f "$ICON_SOURCE" ]]; then
   echo "==> Generating app icon from $ICON_SOURCE"
   generate_icns "$ICON_SOURCE" "$RESOURCES_DIR/$ICON_NAME.icns"
@@ -83,12 +95,17 @@ cat > "$APP_DIR/Contents/Info.plist" <<'PLIST'
 </plist>
 PLIST
 
+echo "==> Installing to /Applications"
+rm -rf "/Applications/$APP_NAME.app"
+cp -R "$APP_DIR" "/Applications/$APP_NAME.app"
+
 cat <<EOF
 ==> Done
 App bundle: $APP_DIR
+Installed:  /Applications/$APP_NAME.app
 
-Current packaging notes:
+Notes:
 - The app bundle embeds the Python worker source tree.
 - It still relies on an available Python 3 runtime plus installed Python deps.
-- After full Xcode installation, this script can be used for native bundle verification.
+- App is now available in Launchpad.
 EOF

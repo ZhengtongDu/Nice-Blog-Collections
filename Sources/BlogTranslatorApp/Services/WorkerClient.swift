@@ -56,8 +56,13 @@ final class WorkerClient: @unchecked Sendable {
         let errorPipe = Pipe()
 
         let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-        process.arguments = ["python3", workerURL.path]
+        if RepositoryLocator.workerUsesLauncher() {
+            process.executableURL = workerURL
+            process.arguments = []
+        } else {
+            process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+            process.arguments = ["python3", workerURL.path]
+        }
         process.currentDirectoryURL = workingDirectory
 
         var environment = ProcessInfo.processInfo.environment

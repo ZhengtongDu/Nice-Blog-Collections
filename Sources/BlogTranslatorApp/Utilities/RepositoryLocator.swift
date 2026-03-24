@@ -31,9 +31,20 @@ enum RepositoryLocator {
 
     static func workerScriptURL() -> URL? {
         if let bundledRoot = bundledWorkerRoot() {
+            // Prefer the launcher script that activates the conda environment.
+            let launcher = bundledRoot.appendingPathComponent("launch_worker.sh")
+            if FileManager.default.fileExists(atPath: launcher.path) {
+                return launcher
+            }
             return bundledRoot.appendingPathComponent("src/worker/main.py")
         }
         return repositoryRoot()?.appendingPathComponent("src/worker/main.py")
+    }
+
+    static func workerUsesLauncher() -> Bool {
+        guard let bundledRoot = bundledWorkerRoot() else { return false }
+        let launcher = bundledRoot.appendingPathComponent("launch_worker.sh")
+        return FileManager.default.fileExists(atPath: launcher.path)
     }
 
     static func workingDirectory() -> URL? {
