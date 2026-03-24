@@ -1,0 +1,3943 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&#x8ba4;&#x77e5;&#x503a;&#xff1a;&#x5f53;&#x901f;&#x5ea6;&#x8d85;&#x51fa;&#x7406;&#x89e3;&#x65f6;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+/* From extension bierner.markdown-checkbox */
+.contains-task-list {
+    padding-left: 0;
+}
+
+.contains-task-list li {
+    margin-left: 24px;
+}
+
+.contains-task-list .task-list-item {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.contains-task-list .contains-task-list {
+    padding-left: 20px;
+} 
+/* From extension bierner.markdown-preview-github-styles */
+html,
+body,
+.github-markdown-body {
+    padding: 0 !important;
+    max-width: auto !important;
+}
+
+.github-markdown-body {
+    background-color: var(--bgColor-default);
+    color: var(--fgColor-default);
+}
+
+.github-markdown-body {
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 100% !important;
+}
+
+.github-markdown-content {
+    padding: 32px !important;
+    max-width: 980px;
+    min-width: 200px;
+    margin: 0 auto;
+}
+
+
+.vscode-body.scrollBeyondLastLine {
+    margin-bottom: 0;
+}
+/*
+ * Other extensions may reuse the markdown render function for embedding additional documents
+ * creating multiple .github-markdown-body elements so this should only apply to the top one
+ */
+.vscode-body.scrollBeyondLastLine > .markdown-body > .github-markdown-body {
+    padding-bottom: calc(100vh + 10px) !important;
+}
+
+.github-markdown-body blockquote {
+    background-color: initial;
+}
+
+.github-markdown-body pre {
+    color: initial;
+    border: none;
+}
+
+.github-markdown-body code {
+    color: inherit;
+}
+
+.github-markdown-body pre code {
+    color: initial;
+}
+
+.github-markdown-body code > div {
+    background: none
+}
+
+.github-markdown-body.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.github-markdown-body p,
+.github-markdown-body blockquote,
+.github-markdown-body ul,
+.github-markdown-body ol,
+.github-markdown-body dl,
+.github-markdown-body table,
+.github-markdown-body pre {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+:is(.vscode-dark, .vscode-light).showEditorSelection .code-active-line:before {
+    border-left: 3px solid var(--borderColor-default);
+}
+:is(.vscode-dark, .vscode-light).showEditorSelection .code-line:hover:before {
+    border-left: 3px solid var(--fgColor-muted);
+}
+
+.github-markdown-body {
+  /* Ideal for movement that starts on the page and ends off the page. */
+  /* Ideal for movement that starts and ends on the page. */
+  /* Ideal for movement that starts off the page and ends on the page. */
+  /* Ideal for non-movement properties, like opacity or background color. */
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  color: var(--fgColor-default);
+  background-color: var(--bgColor-default);
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.github-markdown-body .octicon {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+.github-markdown-body h1:hover .anchor .octicon-link:before,
+.github-markdown-body h2:hover .anchor .octicon-link:before,
+.github-markdown-body h3:hover .anchor .octicon-link:before,
+.github-markdown-body h4:hover .anchor .octicon-link:before,
+.github-markdown-body h5:hover .anchor .octicon-link:before,
+.github-markdown-body h6:hover .anchor .octicon-link:before {
+  width: 16px;
+  height: 16px;
+  content: ' ';
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
+}
+
+.github-markdown-body details,
+.github-markdown-body figcaption,
+.github-markdown-body figure {
+  display: block;
+}
+
+.github-markdown-body summary {
+  display: list-item;
+}
+
+.github-markdown-body [hidden] {
+  display: none !important;
+}
+
+.github-markdown-body a {
+  background-color: transparent;
+  color: var(--fgColor-accent);
+  text-decoration: none;
+}
+
+.github-markdown-body abbr[title] {
+  border-bottom: none;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+}
+
+.github-markdown-body b,
+.github-markdown-body strong {
+  font-weight: var(--base-text-weight-semibold, 600);
+}
+
+.github-markdown-body dfn {
+  font-style: italic;
+}
+
+.github-markdown-body h1 {
+  margin: .67em 0;
+  font-weight: var(--base-text-weight-semibold, 600);
+  padding-bottom: .3em;
+  font-size: 2em;
+  border-bottom: 1px solid var(--borderColor-muted);
+}
+
+.github-markdown-body mark {
+  background-color: var(--bgColor-attention-muted);
+  color: var(--fgColor-default);
+}
+
+.github-markdown-body small {
+  font-size: 90%;
+}
+
+.github-markdown-body sub,
+.github-markdown-body sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.github-markdown-body sub {
+  bottom: -0.25em;
+}
+
+.github-markdown-body sup {
+  top: -0.5em;
+}
+
+.github-markdown-body img {
+  border-style: none;
+  max-width: 100%;
+  box-sizing: content-box;
+}
+
+.github-markdown-body code,
+.github-markdown-body kbd,
+.github-markdown-body pre,
+.github-markdown-body samp {
+  font-family: monospace;
+  font-size: 1em;
+}
+
+.github-markdown-body figure {
+  margin: 1em var(--base-size-40);
+}
+
+.github-markdown-body hr {
+  box-sizing: content-box;
+  overflow: hidden;
+  background: transparent;
+  border-bottom: 1px solid var(--borderColor-muted);
+  height: .25em;
+  padding: 0;
+  margin: var(--base-size-24) 0;
+  background-color: var(--borderColor-default);
+  border: 0;
+}
+
+.github-markdown-body input {
+  font: inherit;
+  margin: 0;
+  overflow: visible;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.github-markdown-body [type=button],
+.github-markdown-body [type=reset],
+.github-markdown-body [type=submit] {
+  -webkit-appearance: button;
+  appearance: button;
+}
+
+.github-markdown-body [type=checkbox],
+.github-markdown-body [type=radio] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.github-markdown-body [type=number]::-webkit-inner-spin-button,
+.github-markdown-body [type=number]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+.github-markdown-body [type=search]::-webkit-search-cancel-button,
+.github-markdown-body [type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.github-markdown-body ::-webkit-input-placeholder {
+  color: inherit;
+  opacity: .54;
+}
+
+.github-markdown-body ::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  appearance: button;
+  font: inherit;
+}
+
+.github-markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.github-markdown-body ::placeholder {
+  color: var(--fgColor-muted);
+  opacity: 1;
+}
+
+.github-markdown-body hr::before {
+  display: table;
+  content: "";
+}
+
+.github-markdown-body hr::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.github-markdown-body table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow: auto;
+  font-variant: tabular-nums;
+}
+
+.github-markdown-body td,
+.github-markdown-body th {
+  padding: 0;
+}
+
+.github-markdown-body details summary {
+  cursor: pointer;
+}
+
+.github-markdown-body a:focus,
+.github-markdown-body [role=button]:focus,
+.github-markdown-body input[type=radio]:focus,
+.github-markdown-body input[type=checkbox]:focus {
+  outline: 2px solid var(--focus-outlineColor);
+  outline-offset: -2px;
+  box-shadow: none;
+}
+
+.github-markdown-body a:focus:not(:focus-visible),
+.github-markdown-body [role=button]:focus:not(:focus-visible),
+.github-markdown-body input[type=radio]:focus:not(:focus-visible),
+.github-markdown-body input[type=checkbox]:focus:not(:focus-visible) {
+  outline: solid 1px transparent;
+}
+
+.github-markdown-body a:focus-visible,
+.github-markdown-body [role=button]:focus-visible,
+.github-markdown-body input[type=radio]:focus-visible,
+.github-markdown-body input[type=checkbox]:focus-visible {
+  outline: 2px solid var(--focus-outlineColor);
+  outline-offset: -2px;
+  box-shadow: none;
+}
+
+.github-markdown-body a:not([class]):focus,
+.github-markdown-body a:not([class]):focus-visible,
+.github-markdown-body input[type=radio]:focus,
+.github-markdown-body input[type=radio]:focus-visible,
+.github-markdown-body input[type=checkbox]:focus,
+.github-markdown-body input[type=checkbox]:focus-visible {
+  outline-offset: 0;
+}
+
+.github-markdown-body kbd {
+  display: inline-block;
+  padding: var(--base-size-4);
+  font: 11px var(--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace);
+  line-height: 10px;
+  color: var(--fgColor-default);
+  vertical-align: middle;
+  background-color: var(--bgColor-muted);
+  border: solid 1px var(--borderColor-neutral-muted);
+  border-bottom-color: var(--borderColor-neutral-muted);
+  border-radius: 6px;
+  box-shadow: inset 0 -1px 0 var(--borderColor-neutral-muted);
+}
+
+.github-markdown-body h1,
+.github-markdown-body h2,
+.github-markdown-body h3,
+.github-markdown-body h4,
+.github-markdown-body h5,
+.github-markdown-body h6 {
+  margin-top: var(--base-size-24);
+  margin-bottom: var(--base-size-16);
+  font-weight: var(--base-text-weight-semibold, 600);
+  line-height: 1.25;
+}
+
+.github-markdown-body h2 {
+  font-weight: var(--base-text-weight-semibold, 600);
+  padding-bottom: .3em;
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--borderColor-muted);
+}
+
+.github-markdown-body h3 {
+  font-weight: var(--base-text-weight-semibold, 600);
+  font-size: 1.25em;
+}
+
+.github-markdown-body h4 {
+  font-weight: var(--base-text-weight-semibold, 600);
+  font-size: 1em;
+}
+
+.github-markdown-body h5 {
+  font-weight: var(--base-text-weight-semibold, 600);
+  font-size: .875em;
+}
+
+.github-markdown-body h6 {
+  font-weight: var(--base-text-weight-semibold, 600);
+  font-size: .85em;
+  color: var(--fgColor-muted);
+}
+
+.github-markdown-body p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.github-markdown-body blockquote {
+  margin: 0;
+  padding: 0 1em;
+  color: var(--fgColor-muted);
+  border-left: .25em solid var(--borderColor-default);
+}
+
+.github-markdown-body ul,
+.github-markdown-body ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 2em;
+}
+
+.github-markdown-body ol ol,
+.github-markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.github-markdown-body ul ul ol,
+.github-markdown-body ul ol ol,
+.github-markdown-body ol ul ol,
+.github-markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.github-markdown-body dd {
+  margin-left: 0;
+}
+
+.github-markdown-body tt,
+.github-markdown-body code,
+.github-markdown-body samp {
+  font-family: var(--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace);
+  font-size: 12px;
+}
+
+.github-markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: var(--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace);
+  font-size: 12px;
+  word-wrap: normal;
+}
+
+.github-markdown-body .octicon {
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.github-markdown-body .Box-body.scrollable-overlay {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.github-markdown-body .Box-body .help {
+  padding-top: var(--base-size-8);
+  margin: 0;
+  color: var(--fgColor-muted);
+  text-align: center;
+}
+
+.github-markdown-body input::-webkit-outer-spin-button,
+.github-markdown-body input::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.github-markdown-body .border-0 {
+  border: 0 !important;
+}
+
+.github-markdown-body .color-fg-muted {
+  color: var(--fgColor-muted) !important;
+}
+
+.github-markdown-body .color-bg-default {
+  background-color: var(--bgColor-default) !important;
+}
+
+.github-markdown-body .mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.github-markdown-body .mr-2 {
+  margin-right: var(--base-size-8, 8px) !important;
+}
+
+.github-markdown-body .my-2 {
+  margin-top: var(--base-size-8, 8px) !important;
+  margin-bottom: var(--base-size-8, 8px) !important;
+}
+
+.github-markdown-body .p-0 {
+  padding: 0 !important;
+}
+
+.github-markdown-body .py-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.github-markdown-body .px-3 {
+  padding-right: var(--base-size-16, 16px) !important;
+  padding-left: var(--base-size-16, 16px) !important;
+}
+
+.github-markdown-body .f6 {
+  font-size: var(--h6-size, 12px) !important;
+}
+
+.github-markdown-body .text-bold {
+  font-weight: var(--base-text-weight-semibold, 600) !important;
+}
+
+.github-markdown-body .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: rect(0 0 0 0);
+  overflow-wrap: normal;
+  border: 0;
+}
+
+.github-markdown-body::before {
+  display: table;
+  content: "";
+}
+
+.github-markdown-body::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.github-markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.github-markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.github-markdown-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.github-markdown-body .absent {
+  color: var(--fgColor-danger);
+}
+
+.github-markdown-body .anchor {
+  float: left;
+  padding-right: var(--base-size-4);
+  margin-left: -20px;
+  line-height: 1;
+}
+
+.github-markdown-body .anchor:focus {
+  outline: none;
+}
+
+.github-markdown-body p,
+.github-markdown-body blockquote,
+.github-markdown-body ul,
+.github-markdown-body ol,
+.github-markdown-body dl,
+.github-markdown-body table,
+.github-markdown-body pre,
+.github-markdown-body details {
+  margin-top: 0;
+  margin-bottom: var(--base-size-16);
+}
+
+.github-markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.github-markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.github-markdown-body h1 .octicon-link,
+.github-markdown-body h2 .octicon-link,
+.github-markdown-body h3 .octicon-link,
+.github-markdown-body h4 .octicon-link,
+.github-markdown-body h5 .octicon-link,
+.github-markdown-body h6 .octicon-link {
+  color: var(--fgColor-default);
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+.github-markdown-body h1:hover .anchor,
+.github-markdown-body h2:hover .anchor,
+.github-markdown-body h3:hover .anchor,
+.github-markdown-body h4:hover .anchor,
+.github-markdown-body h5:hover .anchor,
+.github-markdown-body h6:hover .anchor {
+  text-decoration: none;
+}
+
+.github-markdown-body h1:hover .anchor .octicon-link,
+.github-markdown-body h2:hover .anchor .octicon-link,
+.github-markdown-body h3:hover .anchor .octicon-link,
+.github-markdown-body h4:hover .anchor .octicon-link,
+.github-markdown-body h5:hover .anchor .octicon-link,
+.github-markdown-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+.github-markdown-body h1 tt,
+.github-markdown-body h1 code,
+.github-markdown-body h2 tt,
+.github-markdown-body h2 code,
+.github-markdown-body h3 tt,
+.github-markdown-body h3 code,
+.github-markdown-body h4 tt,
+.github-markdown-body h4 code,
+.github-markdown-body h5 tt,
+.github-markdown-body h5 code,
+.github-markdown-body h6 tt,
+.github-markdown-body h6 code {
+  padding: 0 .2em;
+  font-size: inherit;
+}
+
+.github-markdown-body summary h1,
+.github-markdown-body summary h2,
+.github-markdown-body summary h3,
+.github-markdown-body summary h4,
+.github-markdown-body summary h5,
+.github-markdown-body summary h6 {
+  display: inline-block;
+}
+
+.github-markdown-body summary h1 .anchor,
+.github-markdown-body summary h2 .anchor,
+.github-markdown-body summary h3 .anchor,
+.github-markdown-body summary h4 .anchor,
+.github-markdown-body summary h5 .anchor,
+.github-markdown-body summary h6 .anchor {
+  margin-left: -40px;
+}
+
+.github-markdown-body summary h1,
+.github-markdown-body summary h2 {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.github-markdown-body ul.no-list,
+.github-markdown-body ol.no-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.github-markdown-body ol[type="a s"] {
+  list-style-type: lower-alpha;
+}
+
+.github-markdown-body ol[type="A s"] {
+  list-style-type: upper-alpha;
+}
+
+.github-markdown-body ol[type="i s"] {
+  list-style-type: lower-roman;
+}
+
+.github-markdown-body ol[type="I s"] {
+  list-style-type: upper-roman;
+}
+
+.github-markdown-body ol[type="1"] {
+  list-style-type: decimal;
+}
+
+.github-markdown-body div>ol:not([type]) {
+  list-style-type: decimal;
+}
+
+.github-markdown-body ul ul,
+.github-markdown-body ul ol,
+.github-markdown-body ol ol,
+.github-markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.github-markdown-body li>p {
+  margin-top: var(--base-size-16);
+}
+
+.github-markdown-body li+li {
+  margin-top: .25em;
+}
+
+.github-markdown-body dl {
+  padding: 0;
+}
+
+.github-markdown-body dl dt {
+  padding: 0;
+  margin-top: var(--base-size-16);
+  font-size: 1em;
+  font-style: italic;
+  font-weight: var(--base-text-weight-semibold, 600);
+}
+
+.github-markdown-body dl dd {
+  padding: 0 var(--base-size-16);
+  margin-bottom: var(--base-size-16);
+}
+
+.github-markdown-body table th {
+  font-weight: var(--base-text-weight-semibold, 600);
+}
+
+.github-markdown-body table th,
+.github-markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid var(--borderColor-default);
+}
+
+.github-markdown-body table td>:last-child {
+  margin-bottom: 0;
+}
+
+.github-markdown-body table tr {
+  background-color: var(--bgColor-default);
+  border-top: 1px solid var(--borderColor-muted);
+}
+
+.github-markdown-body table tr:nth-child(2n) {
+  background-color: var(--bgColor-muted);
+}
+
+.github-markdown-body table img {
+  background-color: transparent;
+}
+
+.github-markdown-body img[align=right] {
+  padding-left: 20px;
+}
+
+.github-markdown-body img[align=left] {
+  padding-right: 20px;
+}
+
+.github-markdown-body .emoji {
+  max-width: none;
+  vertical-align: text-top;
+  background-color: transparent;
+}
+
+.github-markdown-body span.frame {
+  display: block;
+  overflow: hidden;
+}
+
+.github-markdown-body span.frame>span {
+  display: block;
+  float: left;
+  width: auto;
+  padding: 7px;
+  margin: 13px 0 0;
+  overflow: hidden;
+  border: 1px solid var(--borderColor-default);
+}
+
+.github-markdown-body span.frame span img {
+  display: block;
+  float: left;
+}
+
+.github-markdown-body span.frame span span {
+  display: block;
+  padding: 5px 0 0;
+  clear: both;
+  color: var(--fgColor-default);
+}
+
+.github-markdown-body span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+
+.github-markdown-body span.align-center>span {
+  display: block;
+  margin: 13px auto 0;
+  overflow: hidden;
+  text-align: center;
+}
+
+.github-markdown-body span.align-center span img {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.github-markdown-body span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+
+.github-markdown-body span.align-right>span {
+  display: block;
+  margin: 13px 0 0;
+  overflow: hidden;
+  text-align: right;
+}
+
+.github-markdown-body span.align-right span img {
+  margin: 0;
+  text-align: right;
+}
+
+.github-markdown-body span.float-left {
+  display: block;
+  float: left;
+  margin-right: 13px;
+  overflow: hidden;
+}
+
+.github-markdown-body span.float-left span {
+  margin: 13px 0 0;
+}
+
+.github-markdown-body span.float-right {
+  display: block;
+  float: right;
+  margin-left: 13px;
+  overflow: hidden;
+}
+
+.github-markdown-body span.float-right>span {
+  display: block;
+  margin: 13px auto 0;
+  overflow: hidden;
+  text-align: right;
+}
+
+.github-markdown-body code,
+.github-markdown-body tt {
+  padding: .2em .4em;
+  margin: 0;
+  font-size: 85%;
+  white-space: break-spaces;
+  background-color: var(--bgColor-neutral-muted);
+  border-radius: 6px;
+}
+
+.github-markdown-body code br,
+.github-markdown-body tt br {
+  display: none;
+}
+
+.github-markdown-body del code {
+  text-decoration: inherit;
+}
+
+.github-markdown-body samp {
+  font-size: 85%;
+}
+
+.github-markdown-body pre code {
+  font-size: 100%;
+}
+
+.github-markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.github-markdown-body .highlight {
+  margin-bottom: var(--base-size-16);
+}
+
+.github-markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.github-markdown-body .highlight pre,
+.github-markdown-body pre {
+  padding: var(--base-size-16);
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  color: var(--fgColor-default);
+  background-color: var(--bgColor-muted);
+  border-radius: 6px;
+}
+
+.github-markdown-body pre code,
+.github-markdown-body pre tt {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.github-markdown-body .csv-data td,
+.github-markdown-body .csv-data th {
+  padding: 5px;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 1;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.github-markdown-body .csv-data .blob-num {
+  padding: 10px var(--base-size-8) 9px;
+  text-align: right;
+  background: var(--bgColor-default);
+  border: 0;
+}
+
+.github-markdown-body .csv-data tr {
+  border-top: 0;
+}
+
+.github-markdown-body .csv-data th {
+  font-weight: var(--base-text-weight-semibold, 600);
+  background: var(--bgColor-muted);
+  border-top: 0;
+}
+
+.github-markdown-body [data-footnote-ref]::before {
+  content: "[";
+}
+
+.github-markdown-body [data-footnote-ref]::after {
+  content: "]";
+}
+
+.github-markdown-body .footnotes {
+  font-size: 12px;
+  color: var(--fgColor-muted);
+  border-top: 1px solid var(--borderColor-default);
+}
+
+.github-markdown-body .footnotes ol {
+  padding-left: var(--base-size-16);
+}
+
+.github-markdown-body .footnotes ol ul {
+  display: inline-block;
+  padding-left: var(--base-size-16);
+  margin-top: var(--base-size-16);
+}
+
+.github-markdown-body .footnotes li {
+  position: relative;
+}
+
+.github-markdown-body .footnotes li:target::before {
+  position: absolute;
+  top: calc(var(--base-size-8)*-1);
+  right: calc(var(--base-size-8)*-1);
+  bottom: calc(var(--base-size-8)*-1);
+  left: calc(var(--base-size-24)*-1);
+  pointer-events: none;
+  content: "";
+  border: 2px solid var(--borderColor-accent-emphasis);
+  border-radius: 6px;
+}
+
+.github-markdown-body .footnotes li:target {
+  color: var(--fgColor-default);
+}
+
+.github-markdown-body .footnotes .data-footnote-backref g-emoji {
+  font-family: monospace;
+}
+
+.github-markdown-body .Box {
+  background-color: var(--bgColor-default);
+  border-color: var(--borderColor-default);
+  border-radius: var(--borderRadius-medium);
+  border-style: solid;
+  border-width: var(--borderWidth-thin);
+}
+
+.github-markdown-body .Box--condensed {
+  line-height: 1.25;
+}
+
+.github-markdown-body .Box--condensed .Box-body,
+.github-markdown-body .Box--condensed .Box-footer,
+.github-markdown-body .Box--condensed .Box-header {
+  padding: var(--stack-padding-condensed) var(--stack-padding-normal);
+}
+
+.github-markdown-body .Box--condensed .Box-row {
+  padding: var(--stack-padding-condensed) var(--stack-padding-normal);
+}
+
+.github-markdown-body .Box-header {
+  background-color: var(--bgColor-muted);
+  border-color: var(--borderColor-default);
+  border-style: solid;
+  border-top-left-radius: var(--borderRadius-medium);
+  border-top-right-radius: var(--borderRadius-medium);
+  border-width: var(--borderWidth-thin);
+  margin: calc(var(--borderWidth-thin)*-1) calc(var(--borderWidth-thin)*-1) 0;
+  padding: var(--stack-padding-normal);
+}
+
+.github-markdown-body .Box-body {
+  border-bottom: var(--borderWidth-thin) solid var(--borderColor-default);
+  padding: var(--stack-padding-normal);
+}
+
+.github-markdown-body .Box-body:last-of-type {
+  border-bottom-left-radius: var(--borderRadius-medium);
+  border-bottom-right-radius: var(--borderRadius-medium);
+  margin-bottom: calc(var(--borderWidth-thin)*-1);
+}
+
+.github-markdown-body .pl-c {
+  color: var(--color-prettylights-syntax-comment);
+}
+
+.github-markdown-body .pl-c1,
+.github-markdown-body .pl-s .pl-v {
+  color: var(--color-prettylights-syntax-constant);
+}
+
+.github-markdown-body .pl-e,
+.github-markdown-body .pl-en {
+  color: var(--color-prettylights-syntax-entity);
+}
+
+.github-markdown-body .pl-smi,
+.github-markdown-body .pl-s .pl-s1 {
+  color: var(--color-prettylights-syntax-storage-modifier-import);
+}
+
+.github-markdown-body .pl-ent {
+  color: var(--color-prettylights-syntax-entity-tag);
+}
+
+.github-markdown-body .pl-k {
+  color: var(--color-prettylights-syntax-keyword);
+}
+
+.github-markdown-body .pl-s,
+.github-markdown-body .pl-pds,
+.github-markdown-body .pl-s .pl-pse .pl-s1,
+.github-markdown-body .pl-sr,
+.github-markdown-body .pl-sr .pl-cce,
+.github-markdown-body .pl-sr .pl-sre,
+.github-markdown-body .pl-sr .pl-sra {
+  color: var(--color-prettylights-syntax-string);
+}
+
+.github-markdown-body .pl-v,
+.github-markdown-body .pl-smw {
+  color: var(--color-prettylights-syntax-variable);
+}
+
+.github-markdown-body .pl-bu {
+  color: var(--color-prettylights-syntax-brackethighlighter-unmatched);
+}
+
+.github-markdown-body .pl-ii {
+  color: var(--color-prettylights-syntax-invalid-illegal-text);
+  background-color: var(--color-prettylights-syntax-invalid-illegal-bg);
+}
+
+.github-markdown-body .pl-c2 {
+  color: var(--color-prettylights-syntax-carriage-return-text);
+  background-color: var(--color-prettylights-syntax-carriage-return-bg);
+}
+
+.github-markdown-body .pl-sr .pl-cce {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-string-regexp);
+}
+
+.github-markdown-body .pl-ml {
+  color: var(--color-prettylights-syntax-markup-list);
+}
+
+.github-markdown-body .pl-mh,
+.github-markdown-body .pl-mh .pl-en,
+.github-markdown-body .pl-ms {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-markup-heading);
+}
+
+.github-markdown-body .pl-mi {
+  font-style: italic;
+  color: var(--color-prettylights-syntax-markup-italic);
+}
+
+.github-markdown-body .pl-mb {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-markup-bold);
+}
+
+.github-markdown-body .pl-md {
+  color: var(--color-prettylights-syntax-markup-deleted-text);
+  background-color: var(--color-prettylights-syntax-markup-deleted-bg);
+}
+
+.github-markdown-body .pl-mi1 {
+  color: var(--color-prettylights-syntax-markup-inserted-text);
+  background-color: var(--color-prettylights-syntax-markup-inserted-bg);
+}
+
+.github-markdown-body .pl-mc {
+  color: var(--color-prettylights-syntax-markup-changed-text);
+  background-color: var(--color-prettylights-syntax-markup-changed-bg);
+}
+
+.github-markdown-body .pl-mi2 {
+  color: var(--color-prettylights-syntax-markup-ignored-text);
+  background-color: var(--color-prettylights-syntax-markup-ignored-bg);
+}
+
+.github-markdown-body .pl-mdr {
+  font-weight: bold;
+  color: var(--color-prettylights-syntax-meta-diff-range);
+}
+
+.github-markdown-body .pl-ba {
+  color: var(--color-prettylights-syntax-brackethighlighter-angle);
+}
+
+.github-markdown-body .pl-sg {
+  color: var(--color-prettylights-syntax-sublimelinter-gutter-mark);
+}
+
+.github-markdown-body .pl-corl {
+  text-decoration: underline;
+  color: var(--color-prettylights-syntax-constant-other-reference-link);
+}
+
+.github-markdown-body [role=button]:focus:not(:focus-visible),
+.github-markdown-body [role=tabpanel][tabindex="0"]:focus:not(:focus-visible),
+.github-markdown-body button:focus:not(:focus-visible),
+.github-markdown-body summary:focus:not(:focus-visible),
+.github-markdown-body a:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+.github-markdown-body [tabindex="0"]:focus:not(:focus-visible),
+.github-markdown-body details-dialog:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.github-markdown-body g-emoji {
+  display: inline-block;
+  min-width: 1ch;
+  font-family: "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 1em;
+  font-style: normal !important;
+  font-weight: var(--base-text-weight-normal, 400);
+  line-height: 1;
+  vertical-align: -0.075em;
+}
+
+.github-markdown-body g-emoji img {
+  width: 1em;
+  height: 1em;
+}
+
+.github-markdown-body .commit-tease-sha {
+  display: inline-block;
+  font-family: var(--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace);
+  font-size: 90%;
+  color: var(--fgColor-default);
+}
+
+.github-markdown-body .blob-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.github-markdown-body .blob-wrapper table tr:nth-child(2n) {
+  background-color: transparent;
+}
+
+.github-markdown-body .blob-wrapper-embedded {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.github-markdown-body .blob-num {
+  position: relative;
+  width: 1%;
+  min-width: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-family: var(--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace);
+  font-size: 12px;
+  line-height: 20px;
+  color: var(--fgColor-muted);
+  text-align: right;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.github-markdown-body .blob-num:hover {
+  color: var(--fgColor-default);
+}
+
+.github-markdown-body .blob-num::before {
+  content: attr(data-line-number);
+}
+
+.github-markdown-body .blob-num.non-expandable {
+  cursor: default;
+}
+
+.github-markdown-body .blob-num.non-expandable:hover {
+  color: var(--fgColor-muted);
+}
+
+.github-markdown-body .blob-code {
+  position: relative;
+  padding-right: 10px;
+  padding-left: 10px;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.github-markdown-body .blob-code-inner {
+  display: table-cell;
+  overflow: visible;
+  font-family: var(--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace);
+  font-size: 12px;
+  color: var(--fgColor-default);
+  word-wrap: anywhere;
+  white-space: pre;
+}
+
+.github-markdown-body .blob-code-inner .x-first {
+  border-top-left-radius: .2em;
+  border-bottom-left-radius: .2em;
+}
+
+.github-markdown-body .blob-code-inner .x-last {
+  border-top-right-radius: .2em;
+  border-bottom-right-radius: .2em;
+}
+
+.github-markdown-body .blob-code-inner.highlighted,
+.github-markdown-body .blob-code-inner .highlighted {
+  background-color: var(--bgColor-attention-muted);
+  box-shadow: inset 2px 0 0 var(--borderColor-attention-muted);
+}
+
+.github-markdown-body .blob-code-inner::selection,
+.github-markdown-body .blob-code-inner *::selection {
+  background-color: var(--selection-bgColor);
+}
+
+.github-markdown-body .blob-code-inner.blob-code-addition,
+.github-markdown-body .blob-code-inner.blob-code-deletion {
+  position: relative;
+  padding-left: 22px !important;
+}
+
+.github-markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.github-markdown-body .task-list-item label {
+  font-weight: var(--base-text-weight-normal, 400);
+}
+
+.github-markdown-body .task-list-item.enabled label {
+  cursor: pointer;
+}
+
+.github-markdown-body .task-list-item+.task-list-item {
+  margin-top: var(--base-size-4);
+}
+
+.github-markdown-body .task-list-item .handle {
+  display: none;
+}
+
+.github-markdown-body .task-list-item-checkbox {
+  margin: 0 .2em .25em -1.4em;
+  vertical-align: middle;
+}
+
+.github-markdown-body ul:dir(rtl) .task-list-item-checkbox {
+  margin: 0 -1.6em .25em .2em;
+}
+
+.github-markdown-body ol:dir(rtl) .task-list-item-checkbox {
+  margin: 0 -1.6em .25em .2em;
+}
+
+.github-markdown-body .contains-task-list:hover .task-list-item-convert-container,
+.github-markdown-body .contains-task-list:focus-within .task-list-item-convert-container {
+  display: block;
+  width: auto;
+  height: 24px;
+  overflow: visible;
+  clip: auto;
+}
+
+.github-markdown-body ::-webkit-calendar-picker-indicator {
+  filter: invert(50%);
+}
+
+.github-markdown-body .markdown-alert {
+  padding: var(--base-size-8) var(--base-size-16);
+  margin-bottom: var(--base-size-16);
+  color: inherit;
+  border-left: .25em solid var(--borderColor-default);
+}
+
+.github-markdown-body .markdown-alert>:first-child {
+  margin-top: 0;
+}
+
+.github-markdown-body .markdown-alert>:last-child {
+  margin-bottom: 0;
+}
+
+.github-markdown-body .markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: var(--base-text-weight-medium, 500);
+  align-items: center;
+  line-height: 1;
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-note {
+  border-left-color: var(--borderColor-accent-emphasis);
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--fgColor-accent);
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-important {
+  border-left-color: var(--borderColor-done-emphasis);
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--fgColor-done);
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-warning {
+  border-left-color: var(--borderColor-attention-emphasis);
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--fgColor-attention);
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-tip {
+  border-left-color: var(--borderColor-success-emphasis);
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--fgColor-success);
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-caution {
+  border-left-color: var(--borderColor-danger-emphasis);
+}
+
+.github-markdown-body .markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--fgColor-danger);
+}
+
+.github-markdown-body>*:first-child>.heading-element:first-child {
+  margin-top: 0 !important;
+}
+
+.github-markdown-body .tab-size[data-tab-size="1"] {
+  tab-size: 1;
+}
+
+.github-markdown-body .tab-size[data-tab-size="2"] {
+  tab-size: 2;
+}
+
+.github-markdown-body .tab-size[data-tab-size="3"] {
+  tab-size: 3;
+}
+
+.github-markdown-body .tab-size[data-tab-size="4"] {
+  tab-size: 4;
+}
+
+.github-markdown-body .tab-size[data-tab-size="5"] {
+  tab-size: 5;
+}
+
+.github-markdown-body .tab-size[data-tab-size="6"] {
+  tab-size: 6;
+}
+
+.github-markdown-body .tab-size[data-tab-size="7"] {
+  tab-size: 7;
+}
+
+.github-markdown-body .tab-size[data-tab-size="8"] {
+  tab-size: 8;
+}
+
+.github-markdown-body .tab-size[data-tab-size="9"] {
+  tab-size: 9;
+}
+
+.github-markdown-body .tab-size[data-tab-size="10"] {
+  tab-size: 10;
+}
+
+.github-markdown-body .tab-size[data-tab-size="11"] {
+  tab-size: 11;
+}
+
+.github-markdown-body .tab-size[data-tab-size="12"] {
+  tab-size: 12;
+}
+
+.github-markdown-body .Box .section-focus .preview-section {
+  display: none;
+}
+
+.github-markdown-body .Box .section-focus .edit-section {
+  display: block;
+}
+
+.github-markdown-body .highlight pre:has(+.zeroclipboard-container) {
+  min-height: 52px;
+}
+
+.markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode=light][data-light-theme=light],
+[data-color-mode=dark][data-dark-theme=light],
+.vscode-body.vscode-light [data-color-mode=auto][data-light-theme=light],
+.vscode-body.vscode-dark [data-color-mode=auto][data-dark-theme=light] {
+  /* light */
+  color-scheme: light;
+  --fgColor-danger: #d1242f;
+  --bgColor-attention-muted: #fff8c5;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-attention-muted: #d4a72c66;
+  --borderColor-danger-emphasis: #cf222e;
+  --borderColor-default: #d1d9e0;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #1a7f37;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+  --color-prettylights-syntax-markup-inserted-text: #116329;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-string-regexp: #116329;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #953800;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-done: #8250df;
+  --fgColor-muted: #59636e;
+  --fgColor-success: #1a7f37;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: #d1d9e0b3;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --fgColor-default: #1f2328;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0969da33;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-light-theme=light] {
+  /* light */
+  color-scheme: light;
+  --fgColor-danger: #d1242f;
+  --bgColor-attention-muted: #fff8c5;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-attention-muted: #d4a72c66;
+  --borderColor-danger-emphasis: #cf222e;
+  --borderColor-default: #d1d9e0;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #1a7f37;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+  --color-prettylights-syntax-markup-inserted-text: #116329;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-string-regexp: #116329;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #953800;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-done: #8250df;
+  --fgColor-muted: #59636e;
+  --fgColor-success: #1a7f37;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: #d1d9e0b3;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --fgColor-default: #1f2328;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0969da33;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-dark-theme=light] {
+  /* light */
+  color-scheme: light;
+  --fgColor-danger: #d1242f;
+  --bgColor-attention-muted: #fff8c5;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-attention-muted: #d4a72c66;
+  --borderColor-danger-emphasis: #cf222e;
+  --borderColor-default: #d1d9e0;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #1a7f37;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+  --color-prettylights-syntax-markup-inserted-text: #116329;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-string-regexp: #116329;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #953800;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-done: #8250df;
+  --fgColor-muted: #59636e;
+  --fgColor-success: #1a7f37;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: #d1d9e0b3;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --fgColor-default: #1f2328;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0969da33;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+.markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode=light][data-light-theme=light_colorblind],
+[data-color-mode=dark][data-dark-theme=light_colorblind],
+.vscode-body.vscode-light [data-color-mode=auto][data-light-theme=light_colorblind],
+.vscode-body.vscode-dark [data-color-mode=auto][data-dark-theme=light_colorblind] {
+  /* light_colorblind */
+  color-scheme: light;
+  --bgColor-attention-muted: #fff8c5;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-attention-muted: #d4a72c66;
+  --borderColor-danger-emphasis: #bc4c00;
+  --borderColor-default: #d1d9e0;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #0969da;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #762c00;
+  --color-prettylights-syntax-carriage-return-bg: #bc4c00;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-invalid-illegal-bg: #762c00;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #bc4c00;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-deleted-bg: #fff1e5;
+  --color-prettylights-syntax-markup-deleted-text: #762c00;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #ddf4ff;
+  --color-prettylights-syntax-markup-inserted-text: #0550ae;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-string-regexp: #0550ae;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #953800;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-danger: #bc4c00;
+  --fgColor-done: #8250df;
+  --fgColor-muted: #59636e;
+  --fgColor-success: #0969da;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: #d1d9e0b3;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --fgColor-default: #1f2328;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0969da33;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-light-theme=light_colorblind] {
+  /* light_colorblind */
+  color-scheme: light;
+  --bgColor-attention-muted: #fff8c5;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-attention-muted: #d4a72c66;
+  --borderColor-danger-emphasis: #bc4c00;
+  --borderColor-default: #d1d9e0;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #0969da;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #762c00;
+  --color-prettylights-syntax-carriage-return-bg: #bc4c00;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-invalid-illegal-bg: #762c00;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #bc4c00;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-deleted-bg: #fff1e5;
+  --color-prettylights-syntax-markup-deleted-text: #762c00;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #ddf4ff;
+  --color-prettylights-syntax-markup-inserted-text: #0550ae;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-string-regexp: #0550ae;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #953800;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-danger: #bc4c00;
+  --fgColor-done: #8250df;
+  --fgColor-muted: #59636e;
+  --fgColor-success: #0969da;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: #d1d9e0b3;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --fgColor-default: #1f2328;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0969da33;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-dark-theme=light_colorblind] {
+  /* light_colorblind */
+  color-scheme: light;
+  --bgColor-attention-muted: #fff8c5;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-attention-muted: #d4a72c66;
+  --borderColor-danger-emphasis: #bc4c00;
+  --borderColor-default: #d1d9e0;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #0969da;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #762c00;
+  --color-prettylights-syntax-carriage-return-bg: #bc4c00;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-invalid-illegal-bg: #762c00;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #bc4c00;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-deleted-bg: #fff1e5;
+  --color-prettylights-syntax-markup-deleted-text: #762c00;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #ddf4ff;
+  --color-prettylights-syntax-markup-inserted-text: #0550ae;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-string-regexp: #0550ae;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #953800;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-danger: #bc4c00;
+  --fgColor-done: #8250df;
+  --fgColor-muted: #59636e;
+  --fgColor-success: #0969da;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: #d1d9e0b3;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --fgColor-default: #1f2328;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0969da33;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+.markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode=light][data-light-theme=light_tritanopia],
+[data-color-mode=dark][data-dark-theme=light_tritanopia],
+.vscode-body.vscode-light [data-color-mode=auto][data-light-theme=light_tritanopia],
+.vscode-body.vscode-dark [data-color-mode=auto][data-dark-theme=light_tritanopia] {
+  /* light_tritanopia */
+  color-scheme: light;
+  --fgColor-danger: #d1242f;
+  --bgColor-attention-muted: #fff8c5;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-attention-muted: #d4a72c66;
+  --borderColor-danger-emphasis: #cf222e;
+  --borderColor-default: #d1d9e0;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #0969da;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-markup-changed-bg: #ffcecb;
+  --color-prettylights-syntax-markup-changed-text: #a40e26;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #ddf4ff;
+  --color-prettylights-syntax-markup-inserted-text: #0550ae;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-string-regexp: #0550ae;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #a40e26;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-done: #8250df;
+  --fgColor-muted: #59636e;
+  --fgColor-success: #0969da;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: #d1d9e0b3;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --fgColor-default: #1f2328;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0969da33;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-light-theme=light_tritanopia] {
+  /* light_tritanopia */
+  color-scheme: light;
+  --fgColor-danger: #d1242f;
+  --bgColor-attention-muted: #fff8c5;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-attention-muted: #d4a72c66;
+  --borderColor-danger-emphasis: #cf222e;
+  --borderColor-default: #d1d9e0;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #0969da;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-markup-changed-bg: #ffcecb;
+  --color-prettylights-syntax-markup-changed-text: #a40e26;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #ddf4ff;
+  --color-prettylights-syntax-markup-inserted-text: #0550ae;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-string-regexp: #0550ae;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #a40e26;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-done: #8250df;
+  --fgColor-muted: #59636e;
+  --fgColor-success: #0969da;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: #d1d9e0b3;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --fgColor-default: #1f2328;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0969da33;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-dark-theme=light_tritanopia] {
+  /* light_tritanopia */
+  color-scheme: light;
+  --fgColor-danger: #d1242f;
+  --bgColor-attention-muted: #fff8c5;
+  --bgColor-muted: #f6f8fa;
+  --bgColor-neutral-muted: #818b981f;
+  --borderColor-accent-emphasis: #0969da;
+  --borderColor-attention-emphasis: #9a6700;
+  --borderColor-attention-muted: #d4a72c66;
+  --borderColor-danger-emphasis: #cf222e;
+  --borderColor-default: #d1d9e0;
+  --borderColor-done-emphasis: #8250df;
+  --borderColor-success-emphasis: #0969da;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #0550ae;
+  --color-prettylights-syntax-constant-other-reference-link: #0a3069;
+  --color-prettylights-syntax-entity: #6639ba;
+  --color-prettylights-syntax-entity-tag: #0550ae;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #cf222e;
+  --color-prettylights-syntax-markup-changed-bg: #ffcecb;
+  --color-prettylights-syntax-markup-changed-text: #a40e26;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #ddf4ff;
+  --color-prettylights-syntax-markup-inserted-text: #0550ae;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-string-regexp: #0550ae;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #a40e26;
+  --fgColor-accent: #0969da;
+  --fgColor-attention: #9a6700;
+  --fgColor-done: #8250df;
+  --fgColor-muted: #59636e;
+  --fgColor-success: #0969da;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: #d1d9e0b3;
+  --color-prettylights-syntax-markup-bold: #1f2328;
+  --color-prettylights-syntax-markup-italic: #1f2328;
+  --color-prettylights-syntax-storage-modifier-import: #1f2328;
+  --fgColor-default: #1f2328;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0969da33;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+.markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode=light][data-light-theme=light_high_contrast],
+[data-color-mode=dark][data-dark-theme=light_high_contrast],
+.vscode-body.vscode-light [data-color-mode=auto][data-light-theme=light_high_contrast],
+.vscode-body.vscode-dark [data-color-mode=auto][data-dark-theme=light_high_contrast] {
+  /* light_high_contrast */
+  color-scheme: light;
+  --bgColor-attention-muted: #fcf7be;
+  --bgColor-muted: #e6eaef;
+  --bgColor-neutral-muted: #e0e6eb;
+  --borderColor-accent-emphasis: #0349b4;
+  --borderColor-attention-emphasis: #744500;
+  --borderColor-attention-muted: #b58407;
+  --borderColor-danger-emphasis: #a0111f;
+  --borderColor-default: #454c54;
+  --borderColor-done-emphasis: #622cbc;
+  --borderColor-success-emphasis: #055d20;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #6e011a;
+  --color-prettylights-syntax-carriage-return-bg: #a0111f;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #023b95;
+  --color-prettylights-syntax-constant-other-reference-link: #032563;
+  --color-prettylights-syntax-entity: #512598;
+  --color-prettylights-syntax-entity-tag: #023b95;
+  --color-prettylights-syntax-invalid-illegal-bg: #6e011a;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #a0111f;
+  --color-prettylights-syntax-markup-changed-bg: #ffc67b;
+  --color-prettylights-syntax-markup-changed-text: #702c00;
+  --color-prettylights-syntax-markup-deleted-bg: #fff0ee;
+  --color-prettylights-syntax-markup-deleted-text: #6e011a;
+  --color-prettylights-syntax-markup-heading: #023b95;
+  --color-prettylights-syntax-markup-ignored-bg: #023b95;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #d2fedb;
+  --color-prettylights-syntax-markup-inserted-text: #024c1a;
+  --color-prettylights-syntax-markup-list: #2e1800;
+  --color-prettylights-syntax-meta-diff-range: #622cbc;
+  --color-prettylights-syntax-string: #032563;
+  --color-prettylights-syntax-string-regexp: #024c1a;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #702c00;
+  --fgColor-accent: #023b95;
+  --fgColor-attention: #603700;
+  --fgColor-danger: #86061d;
+  --fgColor-done: #512598;
+  --fgColor-muted: #454c54;
+  --fgColor-success: #024c1a;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: var(--borderColor-default);
+  --color-prettylights-syntax-markup-bold: #010409;
+  --color-prettylights-syntax-markup-italic: #010409;
+  --color-prettylights-syntax-storage-modifier-import: #010409;
+  --fgColor-default: #010409;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0349b433;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-light-theme=light_high_contrast] {
+  /* light_high_contrast */
+  color-scheme: light;
+  --bgColor-attention-muted: #fcf7be;
+  --bgColor-muted: #e6eaef;
+  --bgColor-neutral-muted: #e0e6eb;
+  --borderColor-accent-emphasis: #0349b4;
+  --borderColor-attention-emphasis: #744500;
+  --borderColor-attention-muted: #b58407;
+  --borderColor-danger-emphasis: #a0111f;
+  --borderColor-default: #454c54;
+  --borderColor-done-emphasis: #622cbc;
+  --borderColor-success-emphasis: #055d20;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #6e011a;
+  --color-prettylights-syntax-carriage-return-bg: #a0111f;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #023b95;
+  --color-prettylights-syntax-constant-other-reference-link: #032563;
+  --color-prettylights-syntax-entity: #512598;
+  --color-prettylights-syntax-entity-tag: #023b95;
+  --color-prettylights-syntax-invalid-illegal-bg: #6e011a;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #a0111f;
+  --color-prettylights-syntax-markup-changed-bg: #ffc67b;
+  --color-prettylights-syntax-markup-changed-text: #702c00;
+  --color-prettylights-syntax-markup-deleted-bg: #fff0ee;
+  --color-prettylights-syntax-markup-deleted-text: #6e011a;
+  --color-prettylights-syntax-markup-heading: #023b95;
+  --color-prettylights-syntax-markup-ignored-bg: #023b95;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #d2fedb;
+  --color-prettylights-syntax-markup-inserted-text: #024c1a;
+  --color-prettylights-syntax-markup-list: #2e1800;
+  --color-prettylights-syntax-meta-diff-range: #622cbc;
+  --color-prettylights-syntax-string: #032563;
+  --color-prettylights-syntax-string-regexp: #024c1a;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #702c00;
+  --fgColor-accent: #023b95;
+  --fgColor-attention: #603700;
+  --fgColor-danger: #86061d;
+  --fgColor-done: #512598;
+  --fgColor-muted: #454c54;
+  --fgColor-success: #024c1a;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: var(--borderColor-default);
+  --color-prettylights-syntax-markup-bold: #010409;
+  --color-prettylights-syntax-markup-italic: #010409;
+  --color-prettylights-syntax-storage-modifier-import: #010409;
+  --fgColor-default: #010409;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0349b433;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-dark-theme=light_high_contrast] {
+  /* light_high_contrast */
+  color-scheme: light;
+  --bgColor-attention-muted: #fcf7be;
+  --bgColor-muted: #e6eaef;
+  --bgColor-neutral-muted: #e0e6eb;
+  --borderColor-accent-emphasis: #0349b4;
+  --borderColor-attention-emphasis: #744500;
+  --borderColor-attention-muted: #b58407;
+  --borderColor-danger-emphasis: #a0111f;
+  --borderColor-default: #454c54;
+  --borderColor-done-emphasis: #622cbc;
+  --borderColor-success-emphasis: #055d20;
+  --color-prettylights-syntax-brackethighlighter-angle: #59636e;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #6e011a;
+  --color-prettylights-syntax-carriage-return-bg: #a0111f;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-comment: #59636e;
+  --color-prettylights-syntax-constant: #023b95;
+  --color-prettylights-syntax-constant-other-reference-link: #032563;
+  --color-prettylights-syntax-entity: #512598;
+  --color-prettylights-syntax-entity-tag: #023b95;
+  --color-prettylights-syntax-invalid-illegal-bg: #6e011a;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-keyword: #a0111f;
+  --color-prettylights-syntax-markup-changed-bg: #ffc67b;
+  --color-prettylights-syntax-markup-changed-text: #702c00;
+  --color-prettylights-syntax-markup-deleted-bg: #fff0ee;
+  --color-prettylights-syntax-markup-deleted-text: #6e011a;
+  --color-prettylights-syntax-markup-heading: #023b95;
+  --color-prettylights-syntax-markup-ignored-bg: #023b95;
+  --color-prettylights-syntax-markup-ignored-text: #d1d9e0;
+  --color-prettylights-syntax-markup-inserted-bg: #d2fedb;
+  --color-prettylights-syntax-markup-inserted-text: #024c1a;
+  --color-prettylights-syntax-markup-list: #2e1800;
+  --color-prettylights-syntax-meta-diff-range: #622cbc;
+  --color-prettylights-syntax-string: #032563;
+  --color-prettylights-syntax-string-regexp: #024c1a;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;
+  --color-prettylights-syntax-variable: #702c00;
+  --fgColor-accent: #023b95;
+  --fgColor-attention: #603700;
+  --fgColor-danger: #86061d;
+  --fgColor-done: #512598;
+  --fgColor-muted: #454c54;
+  --fgColor-success: #024c1a;
+  --bgColor-default: #ffffff;
+  --borderColor-muted: var(--borderColor-default);
+  --color-prettylights-syntax-markup-bold: #010409;
+  --color-prettylights-syntax-markup-italic: #010409;
+  --color-prettylights-syntax-storage-modifier-import: #010409;
+  --fgColor-default: #010409;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #0349b433;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+.markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode=light][data-light-theme=dark],
+[data-color-mode=dark][data-dark-theme=dark],
+.vscode-body.vscode-light [data-color-mode=auto][data-light-theme=dark],
+.vscode-body.vscode-dark [data-color-mode=auto][data-dark-theme=dark] {
+  /* dark */
+  color-scheme: dark;
+  --fgColor-accent: #4493f8;
+  --bgColor-attention-muted: #bb800926;
+  --bgColor-default: #0d1117;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-attention-muted: #bb800966;
+  --borderColor-danger-emphasis: #da3633;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8957e5;
+  --borderColor-success-emphasis: #238636;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffa657;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f85149;
+  --fgColor-default: #f0f6fc;
+  --fgColor-done: #ab7df8;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #3fb950;
+  --borderColor-muted: #3d444db3;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #1f6febb3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-light-theme=dark] {
+  /* dark */
+  color-scheme: dark;
+  --fgColor-accent: #4493f8;
+  --bgColor-attention-muted: #bb800926;
+  --bgColor-default: #0d1117;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-attention-muted: #bb800966;
+  --borderColor-danger-emphasis: #da3633;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8957e5;
+  --borderColor-success-emphasis: #238636;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffa657;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f85149;
+  --fgColor-default: #f0f6fc;
+  --fgColor-done: #ab7df8;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #3fb950;
+  --borderColor-muted: #3d444db3;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #1f6febb3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-dark-theme=dark] {
+  /* dark */
+  color-scheme: dark;
+  --fgColor-accent: #4493f8;
+  --bgColor-attention-muted: #bb800926;
+  --bgColor-default: #0d1117;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-attention-muted: #bb800966;
+  --borderColor-danger-emphasis: #da3633;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8957e5;
+  --borderColor-success-emphasis: #238636;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #033a16;
+  --color-prettylights-syntax-markup-inserted-text: #aff5b4;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-string-regexp: #7ee787;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffa657;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f85149;
+  --fgColor-default: #f0f6fc;
+  --fgColor-done: #ab7df8;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #3fb950;
+  --borderColor-muted: #3d444db3;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #1f6febb3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+.markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode=light][data-light-theme=dark_dimmed],
+[data-color-mode=dark][data-dark-theme=dark_dimmed],
+.vscode-body.vscode-light [data-color-mode=auto][data-light-theme=dark_dimmed],
+.vscode-body.vscode-dark [data-color-mode=auto][data-dark-theme=dark_dimmed] {
+  /* dark_dimmed */
+  color-scheme: dark;
+  --fgColor-accent: #478be6;
+  --bgColor-attention-muted: #ae7c1426;
+  --bgColor-default: #212830;
+  --bgColor-muted: #262c36;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #316dca;
+  --borderColor-attention-emphasis: #966600;
+  --borderColor-attention-muted: #ae7c1466;
+  --borderColor-danger-emphasis: #c93c37;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8256d0;
+  --borderColor-muted: #3d444db3;
+  --borderColor-neutral-muted: #3d444db3;
+  --borderColor-success-emphasis: #347d39;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #e5534b;
+  --color-prettylights-syntax-carriage-return-bg: #ad2e2c;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #6cb6ff;
+  --color-prettylights-syntax-constant-other-reference-link: #96d0ff;
+  --color-prettylights-syntax-entity: #dcbdfb;
+  --color-prettylights-syntax-entity-tag: #8ddb8c;
+  --color-prettylights-syntax-invalid-illegal-bg: #922323;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #f47067;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #682d0f;
+  --color-prettylights-syntax-markup-changed-text: #ffddb0;
+  --color-prettylights-syntax-markup-deleted-bg: #78191b;
+  --color-prettylights-syntax-markup-deleted-text: #ffd8d3;
+  --color-prettylights-syntax-markup-heading: #316dca;
+  --color-prettylights-syntax-markup-ignored-bg: #255ab2;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #1b4721;
+  --color-prettylights-syntax-markup-inserted-text: #b4f1b4;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #eac55f;
+  --color-prettylights-syntax-meta-diff-range: #dcbdfb;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #96d0ff;
+  --color-prettylights-syntax-string-regexp: #8ddb8c;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #f69d50;
+  --fgColor-attention: #c69026;
+  --fgColor-danger: #e5534b;
+  --fgColor-default: #d1d7e0;
+  --fgColor-done: #986ee2;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #57ab5a;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #316dcab3;
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-light-theme=dark_dimmed] {
+  /* dark_dimmed */
+  color-scheme: dark;
+  --fgColor-accent: #478be6;
+  --bgColor-attention-muted: #ae7c1426;
+  --bgColor-default: #212830;
+  --bgColor-muted: #262c36;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #316dca;
+  --borderColor-attention-emphasis: #966600;
+  --borderColor-attention-muted: #ae7c1466;
+  --borderColor-danger-emphasis: #c93c37;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8256d0;
+  --borderColor-muted: #3d444db3;
+  --borderColor-neutral-muted: #3d444db3;
+  --borderColor-success-emphasis: #347d39;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #e5534b;
+  --color-prettylights-syntax-carriage-return-bg: #ad2e2c;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #6cb6ff;
+  --color-prettylights-syntax-constant-other-reference-link: #96d0ff;
+  --color-prettylights-syntax-entity: #dcbdfb;
+  --color-prettylights-syntax-entity-tag: #8ddb8c;
+  --color-prettylights-syntax-invalid-illegal-bg: #922323;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #f47067;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #682d0f;
+  --color-prettylights-syntax-markup-changed-text: #ffddb0;
+  --color-prettylights-syntax-markup-deleted-bg: #78191b;
+  --color-prettylights-syntax-markup-deleted-text: #ffd8d3;
+  --color-prettylights-syntax-markup-heading: #316dca;
+  --color-prettylights-syntax-markup-ignored-bg: #255ab2;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #1b4721;
+  --color-prettylights-syntax-markup-inserted-text: #b4f1b4;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #eac55f;
+  --color-prettylights-syntax-meta-diff-range: #dcbdfb;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #96d0ff;
+  --color-prettylights-syntax-string-regexp: #8ddb8c;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #f69d50;
+  --fgColor-attention: #c69026;
+  --fgColor-danger: #e5534b;
+  --fgColor-default: #d1d7e0;
+  --fgColor-done: #986ee2;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #57ab5a;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #316dcab3;
+}
+
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-dark-theme=dark_dimmed] {
+  /* dark_dimmed */
+  color-scheme: dark;
+  --fgColor-accent: #478be6;
+  --bgColor-attention-muted: #ae7c1426;
+  --bgColor-default: #212830;
+  --bgColor-muted: #262c36;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #316dca;
+  --borderColor-attention-emphasis: #966600;
+  --borderColor-attention-muted: #ae7c1466;
+  --borderColor-danger-emphasis: #c93c37;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8256d0;
+  --borderColor-muted: #3d444db3;
+  --borderColor-neutral-muted: #3d444db3;
+  --borderColor-success-emphasis: #347d39;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #e5534b;
+  --color-prettylights-syntax-carriage-return-bg: #ad2e2c;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #6cb6ff;
+  --color-prettylights-syntax-constant-other-reference-link: #96d0ff;
+  --color-prettylights-syntax-entity: #dcbdfb;
+  --color-prettylights-syntax-entity-tag: #8ddb8c;
+  --color-prettylights-syntax-invalid-illegal-bg: #922323;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #f47067;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #682d0f;
+  --color-prettylights-syntax-markup-changed-text: #ffddb0;
+  --color-prettylights-syntax-markup-deleted-bg: #78191b;
+  --color-prettylights-syntax-markup-deleted-text: #ffd8d3;
+  --color-prettylights-syntax-markup-heading: #316dca;
+  --color-prettylights-syntax-markup-ignored-bg: #255ab2;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #1b4721;
+  --color-prettylights-syntax-markup-inserted-text: #b4f1b4;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #eac55f;
+  --color-prettylights-syntax-meta-diff-range: #dcbdfb;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #96d0ff;
+  --color-prettylights-syntax-string-regexp: #8ddb8c;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #f69d50;
+  --fgColor-attention: #c69026;
+  --fgColor-danger: #e5534b;
+  --fgColor-default: #d1d7e0;
+  --fgColor-done: #986ee2;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #57ab5a;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #316dcab3;
+}
+
+}
+
+.markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode=light][data-light-theme=dark_colorblind],
+[data-color-mode=dark][data-dark-theme=dark_colorblind],
+.vscode-body.vscode-light [data-color-mode=auto][data-light-theme=dark_colorblind],
+.vscode-body.vscode-dark [data-color-mode=auto][data-dark-theme=dark_colorblind] {
+  /* dark_colorblind */
+  color-scheme: dark;
+  --fgColor-accent: #4493f8;
+  --bgColor-attention-muted: #bb800926;
+  --bgColor-default: #0d1117;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-attention-muted: #bb800966;
+  --borderColor-danger-emphasis: #bd561d;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8957e5;
+  --borderColor-success-emphasis: #1f6feb;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #db6d28;
+  --color-prettylights-syntax-carriage-return-bg: #9b4215;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #a5d6ff;
+  --color-prettylights-syntax-invalid-illegal-bg: #762d0a;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #f0883e;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-deleted-bg: #5a1e02;
+  --color-prettylights-syntax-markup-deleted-text: #ffdfb6;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #0c2d6b;
+  --color-prettylights-syntax-markup-inserted-text: #cae8ff;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-string-regexp: #a5d6ff;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffa657;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f0883e;
+  --fgColor-default: #f0f6fc;
+  --fgColor-done: #ab7df8;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #58a6ff;
+  --borderColor-muted: #3d444db3;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #1f6febb3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-light-theme=dark_colorblind] {
+  /* dark_colorblind */
+  color-scheme: dark;
+  --fgColor-accent: #4493f8;
+  --bgColor-attention-muted: #bb800926;
+  --bgColor-default: #0d1117;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-attention-muted: #bb800966;
+  --borderColor-danger-emphasis: #bd561d;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8957e5;
+  --borderColor-success-emphasis: #1f6feb;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #db6d28;
+  --color-prettylights-syntax-carriage-return-bg: #9b4215;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #a5d6ff;
+  --color-prettylights-syntax-invalid-illegal-bg: #762d0a;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #f0883e;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-deleted-bg: #5a1e02;
+  --color-prettylights-syntax-markup-deleted-text: #ffdfb6;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #0c2d6b;
+  --color-prettylights-syntax-markup-inserted-text: #cae8ff;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-string-regexp: #a5d6ff;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffa657;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f0883e;
+  --fgColor-default: #f0f6fc;
+  --fgColor-done: #ab7df8;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #58a6ff;
+  --borderColor-muted: #3d444db3;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #1f6febb3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-dark-theme=dark_colorblind] {
+  /* dark_colorblind */
+  color-scheme: dark;
+  --fgColor-accent: #4493f8;
+  --bgColor-attention-muted: #bb800926;
+  --bgColor-default: #0d1117;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-attention-muted: #bb800966;
+  --borderColor-danger-emphasis: #bd561d;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8957e5;
+  --borderColor-success-emphasis: #1f6feb;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #db6d28;
+  --color-prettylights-syntax-carriage-return-bg: #9b4215;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #a5d6ff;
+  --color-prettylights-syntax-invalid-illegal-bg: #762d0a;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #f0883e;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #5a1e02;
+  --color-prettylights-syntax-markup-changed-text: #ffdfb6;
+  --color-prettylights-syntax-markup-deleted-bg: #5a1e02;
+  --color-prettylights-syntax-markup-deleted-text: #ffdfb6;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #0c2d6b;
+  --color-prettylights-syntax-markup-inserted-text: #cae8ff;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-string-regexp: #a5d6ff;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffa657;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f0883e;
+  --fgColor-default: #f0f6fc;
+  --fgColor-done: #ab7df8;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #58a6ff;
+  --borderColor-muted: #3d444db3;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #1f6febb3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+.markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode=light][data-light-theme=dark_tritanopia],
+[data-color-mode=dark][data-dark-theme=dark_tritanopia],
+.vscode-body.vscode-light [data-color-mode=auto][data-light-theme=dark_tritanopia],
+.vscode-body.vscode-dark [data-color-mode=auto][data-dark-theme=dark_tritanopia] {
+  /* dark_tritanopia */
+  color-scheme: dark;
+  --fgColor-accent: #4493f8;
+  --bgColor-attention-muted: #bb800926;
+  --bgColor-default: #0d1117;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-attention-muted: #bb800966;
+  --borderColor-danger-emphasis: #da3633;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8957e5;
+  --borderColor-success-emphasis: #1f6feb;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #a5d6ff;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #67060c;
+  --color-prettylights-syntax-markup-changed-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #0c2d6b;
+  --color-prettylights-syntax-markup-inserted-text: #cae8ff;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-string-regexp: #a5d6ff;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffa198;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f85149;
+  --fgColor-default: #f0f6fc;
+  --fgColor-done: #ab7df8;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #58a6ff;
+  --borderColor-muted: #3d444db3;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #1f6febb3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-light-theme=dark_tritanopia] {
+  /* dark_tritanopia */
+  color-scheme: dark;
+  --fgColor-accent: #4493f8;
+  --bgColor-attention-muted: #bb800926;
+  --bgColor-default: #0d1117;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-attention-muted: #bb800966;
+  --borderColor-danger-emphasis: #da3633;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8957e5;
+  --borderColor-success-emphasis: #1f6feb;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #a5d6ff;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #67060c;
+  --color-prettylights-syntax-markup-changed-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #0c2d6b;
+  --color-prettylights-syntax-markup-inserted-text: #cae8ff;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-string-regexp: #a5d6ff;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffa198;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f85149;
+  --fgColor-default: #f0f6fc;
+  --fgColor-done: #ab7df8;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #58a6ff;
+  --borderColor-muted: #3d444db3;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #1f6febb3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-dark-theme=dark_tritanopia] {
+  /* dark_tritanopia */
+  color-scheme: dark;
+  --fgColor-accent: #4493f8;
+  --bgColor-attention-muted: #bb800926;
+  --bgColor-default: #0d1117;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #656c7633;
+  --borderColor-accent-emphasis: #1f6feb;
+  --borderColor-attention-emphasis: #9e6a03;
+  --borderColor-attention-muted: #bb800966;
+  --borderColor-danger-emphasis: #da3633;
+  --borderColor-default: #3d444d;
+  --borderColor-done-emphasis: #8957e5;
+  --borderColor-success-emphasis: #1f6feb;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-carriage-return-bg: #b62324;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-constant-other-reference-link: #a5d6ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #a5d6ff;
+  --color-prettylights-syntax-invalid-illegal-bg: #8e1519;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #67060c;
+  --color-prettylights-syntax-markup-changed-text: #ffdcd7;
+  --color-prettylights-syntax-markup-deleted-bg: #67060c;
+  --color-prettylights-syntax-markup-deleted-text: #ffdcd7;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-ignored-bg: #1158c7;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #0c2d6b;
+  --color-prettylights-syntax-markup-inserted-text: #cae8ff;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+  --color-prettylights-syntax-meta-diff-range: #d2a8ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-string-regexp: #a5d6ff;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffa198;
+  --fgColor-attention: #d29922;
+  --fgColor-danger: #f85149;
+  --fgColor-default: #f0f6fc;
+  --fgColor-done: #ab7df8;
+  --fgColor-muted: #9198a1;
+  --fgColor-success: #58a6ff;
+  --borderColor-muted: #3d444db3;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #1f6febb3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+.markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode=light][data-light-theme=dark_high_contrast],
+[data-color-mode=dark][data-dark-theme=dark_high_contrast],
+.vscode-body.vscode-light [data-color-mode=auto][data-light-theme=dark_high_contrast],
+.vscode-body.vscode-dark [data-color-mode=auto][data-dark-theme=dark_high_contrast] {
+  /* dark_high_contrast */
+  color-scheme: dark;
+  --fgColor-accent: #74b9ff;
+  --fgColor-done: #d3abff;
+  --fgColor-success: #2bd853;
+  --bgColor-attention-muted: #edaa2726;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #212830;
+  --borderColor-accent-emphasis: #409eff;
+  --borderColor-attention-emphasis: #e09b13;
+  --borderColor-attention-muted: #edaa27;
+  --borderColor-danger-emphasis: #ff6a69;
+  --borderColor-default: #b7bdc8;
+  --borderColor-done-emphasis: #b87fff;
+  --borderColor-success-emphasis: #09b43a;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #ff8080;
+  --color-prettylights-syntax-carriage-return-bg: #ff4445;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #91cbff;
+  --color-prettylights-syntax-constant-other-reference-link: #addcff;
+  --color-prettylights-syntax-entity: #dbb7ff;
+  --color-prettylights-syntax-entity-tag: #72f088;
+  --color-prettylights-syntax-invalid-illegal-bg: #e82a2f;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #ff9492;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #a74c00;
+  --color-prettylights-syntax-markup-changed-text: #ffe1b4;
+  --color-prettylights-syntax-markup-deleted-bg: #cc1421;
+  --color-prettylights-syntax-markup-deleted-text: #ffdedb;
+  --color-prettylights-syntax-markup-heading: #409eff;
+  --color-prettylights-syntax-markup-ignored-bg: #318bf8;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #007728;
+  --color-prettylights-syntax-markup-inserted-text: #acf7b6;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #fbd669;
+  --color-prettylights-syntax-meta-diff-range: #dbb7ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #addcff;
+  --color-prettylights-syntax-string-regexp: #72f088;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffb757;
+  --fgColor-attention: #f0b72f;
+  --fgColor-danger: #ff9492;
+  --fgColor-muted: #b7bdc8;
+  --bgColor-default: #010409;
+  --borderColor-muted: var(--borderColor-default);
+  --fgColor-default: #ffffff;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #194fb1b3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+@media (prefers-color-scheme: light) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-light-theme=dark_high_contrast] {
+  /* dark_high_contrast */
+  color-scheme: dark;
+  --fgColor-accent: #74b9ff;
+  --fgColor-done: #d3abff;
+  --fgColor-success: #2bd853;
+  --bgColor-attention-muted: #edaa2726;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #212830;
+  --borderColor-accent-emphasis: #409eff;
+  --borderColor-attention-emphasis: #e09b13;
+  --borderColor-attention-muted: #edaa27;
+  --borderColor-danger-emphasis: #ff6a69;
+  --borderColor-default: #b7bdc8;
+  --borderColor-done-emphasis: #b87fff;
+  --borderColor-success-emphasis: #09b43a;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #ff8080;
+  --color-prettylights-syntax-carriage-return-bg: #ff4445;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #91cbff;
+  --color-prettylights-syntax-constant-other-reference-link: #addcff;
+  --color-prettylights-syntax-entity: #dbb7ff;
+  --color-prettylights-syntax-entity-tag: #72f088;
+  --color-prettylights-syntax-invalid-illegal-bg: #e82a2f;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #ff9492;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #a74c00;
+  --color-prettylights-syntax-markup-changed-text: #ffe1b4;
+  --color-prettylights-syntax-markup-deleted-bg: #cc1421;
+  --color-prettylights-syntax-markup-deleted-text: #ffdedb;
+  --color-prettylights-syntax-markup-heading: #409eff;
+  --color-prettylights-syntax-markup-ignored-bg: #318bf8;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #007728;
+  --color-prettylights-syntax-markup-inserted-text: #acf7b6;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #fbd669;
+  --color-prettylights-syntax-meta-diff-range: #dbb7ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #addcff;
+  --color-prettylights-syntax-string-regexp: #72f088;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffb757;
+  --fgColor-attention: #f0b72f;
+  --fgColor-danger: #ff9492;
+  --fgColor-muted: #b7bdc8;
+  --bgColor-default: #010409;
+  --borderColor-muted: var(--borderColor-default);
+  --fgColor-default: #ffffff;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #194fb1b3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+@media (prefers-color-scheme: dark) {
+  .markdown-body {
+  --base-size-16: 1rem;
+  --base-size-24: 1.5rem;
+  --base-size-4: 0.25rem;
+  --base-size-40: 2.5rem;
+  --base-size-8: 0.5rem;
+  --base-text-weight-medium: 500;
+  --base-text-weight-normal: 400;
+  --base-text-weight-semibold: 600;
+  --borderRadius-medium: 0.375rem;
+  --borderWidth-thin: 0.0625rem;
+  --stack-padding-condensed: 0.5rem;
+  --stack-padding-normal: 1rem;
+  --fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  --h6-size: 0.75rem;
+  --fgColor-accent: Highlight;
+}
+
+[data-color-mode='system'][data-dark-theme=dark_high_contrast] {
+  /* dark_high_contrast */
+  color-scheme: dark;
+  --fgColor-accent: #74b9ff;
+  --fgColor-done: #d3abff;
+  --fgColor-success: #2bd853;
+  --bgColor-attention-muted: #edaa2726;
+  --bgColor-muted: #151b23;
+  --bgColor-neutral-muted: #212830;
+  --borderColor-accent-emphasis: #409eff;
+  --borderColor-attention-emphasis: #e09b13;
+  --borderColor-attention-muted: #edaa27;
+  --borderColor-danger-emphasis: #ff6a69;
+  --borderColor-default: #b7bdc8;
+  --borderColor-done-emphasis: #b87fff;
+  --borderColor-success-emphasis: #09b43a;
+  --color-prettylights-syntax-brackethighlighter-angle: #9198a1;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #ff8080;
+  --color-prettylights-syntax-carriage-return-bg: #ff4445;
+  --color-prettylights-syntax-carriage-return-text: #f0f6fc;
+  --color-prettylights-syntax-comment: #9198a1;
+  --color-prettylights-syntax-constant: #91cbff;
+  --color-prettylights-syntax-constant-other-reference-link: #addcff;
+  --color-prettylights-syntax-entity: #dbb7ff;
+  --color-prettylights-syntax-entity-tag: #72f088;
+  --color-prettylights-syntax-invalid-illegal-bg: #e82a2f;
+  --color-prettylights-syntax-invalid-illegal-text: #f0f6fc;
+  --color-prettylights-syntax-keyword: #ff9492;
+  --color-prettylights-syntax-markup-bold: #f0f6fc;
+  --color-prettylights-syntax-markup-changed-bg: #a74c00;
+  --color-prettylights-syntax-markup-changed-text: #ffe1b4;
+  --color-prettylights-syntax-markup-deleted-bg: #cc1421;
+  --color-prettylights-syntax-markup-deleted-text: #ffdedb;
+  --color-prettylights-syntax-markup-heading: #409eff;
+  --color-prettylights-syntax-markup-ignored-bg: #318bf8;
+  --color-prettylights-syntax-markup-ignored-text: #f0f6fc;
+  --color-prettylights-syntax-markup-inserted-bg: #007728;
+  --color-prettylights-syntax-markup-inserted-text: #acf7b6;
+  --color-prettylights-syntax-markup-italic: #f0f6fc;
+  --color-prettylights-syntax-markup-list: #fbd669;
+  --color-prettylights-syntax-meta-diff-range: #dbb7ff;
+  --color-prettylights-syntax-storage-modifier-import: #f0f6fc;
+  --color-prettylights-syntax-string: #addcff;
+  --color-prettylights-syntax-string-regexp: #72f088;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #3d444d;
+  --color-prettylights-syntax-variable: #ffb757;
+  --fgColor-attention: #f0b72f;
+  --fgColor-danger: #ff9492;
+  --fgColor-muted: #b7bdc8;
+  --bgColor-default: #010409;
+  --borderColor-muted: var(--borderColor-default);
+  --fgColor-default: #ffffff;
+  --focus-outlineColor: var(--borderColor-accent-emphasis);
+  --selection-bgColor: #194fb1b3;
+  --borderColor-neutral-muted: var(--borderColor-muted);
+}
+
+}
+
+/*!
+  Theme: GitHub
+  Description: Highlight-js port of github.com theme
+  Author: github.com
+  Maintainer: @SNDST00M, @mjbvz
+  Updated: 2021-12-08
+*/
+.markdown-body pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 16px;
+}
+
+.markdown-body code.hljs {
+  padding: 3px 5px;
+}
+
+/*!
+  Theme: GitHub
+  Description: Theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Outdated base version: https://github.com/primer/github-syntax-dark
+  Current colors taken from GitHub's CSS
+*/
+.markdown-body .hljs,
+.markdown-body pre > code {
+  color: var(--color-fg-default);
+  background: var(--color-canvas-subtle);
+}
+
+.markdown-body .hljs-function,
+.markdown-body .hljs-params {
+  color: var(--color-fg-default);
+}
+
+.markdown-body .hljs-doctag,
+.markdown-body .hljs-keyword,
+.markdown-body .hljs-meta .hljs-keyword,
+.markdown-body .hljs-template-tag,
+.markdown-body .hljs-template-variable,
+.markdown-body .hljs-type,
+.markdown-body .hljs-variable.language_ {
+  color: var(--color-prettylights-syntax-keyword);
+}
+
+.markdown-body .hljs-title,
+.markdown-body .hljs-title.class_,
+.markdown-body .hljs-title.class_.inherited__,
+.markdown-body .hljs-title.function_ {
+  color: var(--color-prettylights-syntax-entity);
+}
+
+.markdown-body .hljs-attr,
+.markdown-body .hljs-attribute,
+.markdown-body .hljs-literal,
+.markdown-body .hljs-meta,
+.markdown-body .hljs-number,
+.markdown-body .hljs-operator,
+.markdown-body .hljs-selector-attr,
+.markdown-body .hljs-selector-class,
+.markdown-body .hljs-selector-id,
+.markdown-body .hljs-variable {
+  color: var(--color-prettylights-syntax-constant);
+}
+
+.markdown-body .hljs-meta .hljs-string,
+.markdown-body .hljs-regexp,
+.markdown-body .hljs-string {
+  color: var(--color-prettylights-syntax-string);
+}
+
+.markdown-body .hljs-built_in,
+.markdown-body .hljs-symbol {
+  color: var(--color-prettylights-syntax-variable);
+}
+
+.markdown-body .hljs-code,
+.markdown-body .hljs-comment,
+.markdown-body .hljs-formula {
+  color: var(--color-prettylights-syntax-comment);
+}
+
+.markdown-body .hljs-name,
+.markdown-body .hljs-quote,
+.markdown-body .hljs-selector-pseudo,
+.markdown-body .hljs-selector-tag {
+  color: var(--color-prettylights-syntax-entity-tag);
+}
+
+.markdown-body .hljs-subst {
+  color: var(--color-prettylights-syntax-constant);
+}
+
+.markdown-body .hljs-section {
+  color: var(--color-prettylights-syntax-markup-heading);
+  font-weight: bold;
+}
+
+.markdown-body .hljs-bullet {
+  color: var(--color-prettylights-syntax-markup-list);
+}
+
+.markdown-body .hljs-emphasis {
+  color: var(--color-prettylights-syntax-constant);
+  font-style: italic;
+}
+
+.markdown-body .hljs-strong {
+  color: var(--color-prettylights-syntax-constant);
+  font-weight: bold;
+}
+
+.markdown-body .hljs-addition {
+  color: var(--color-prettylights-syntax-markup-inserted-text);
+  background-color: var(--color-prettylights-syntax-markup-inserted-bg);
+}
+
+.markdown-body .hljs-deletion {
+  color: var(--color-prettylights-syntax-markup-deleted-text);
+  background-color: var(--color-prettylights-syntax-markup-deleted-bg);
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <div
+            class="github-markdown-body"
+            data-color-mode="auto"
+            data-light-theme="light"
+            data-dark-theme="dark"
+        >
+            <div class="github-markdown-content"><blockquote>
+<p>原文标题：Cognitive Debt: When Velocity Exceeds Comprehension
+作者：Ganesh Pagade
+原文链接：<a href="https://www.rockoder.com/beyondthecode/cognitive-debt-when-velocity-exceeds-comprehension/">https://www.rockoder.com/beyondthecode/cognitive-debt-when-velocity-exceeds-comprehension/</a>
+本文为翻译作品，版权归原作者所有。</p>
+</blockquote>
+<blockquote>
+<p>2026 年 2 月 17 日 / 阅读时间 9 分钟</p>
+<p><strong>摘要</strong>：</p>
+<p>当开发速度远超团队的理解能力时，技术债务会以“认知债”的形式悄然积累。</p>
+<p>文章通过一个工程师在六个月后无法理解自己代码的典型案例，揭示了现代软件开发中“生产成本低”与“感知成本高”的矛盾。</p>
+<p>这种认知债不仅阻碍了架构演进，更让开发者在面对自己的代码时产生强烈的陌生感与无力感。</p>
+<p>若不加以控制，这种债务将最终导致系统维护成本的指数级上升。</p>
+</blockquote>
+<h2 id="认知债当速度超出理解时">认知债：当速度超出理解时</h2>
+<p>工程师在一次冲刺（Sprint）中交付了七个功能。DORA 指标看起来完美无缺，晋升材料似乎唾手可得。</p>
+<p>然而，六个月后，当架构变更需要修改这些功能时，团队中竟无人能够解释某些组件存在的缘由，或它们之间如何相互作用。构建这些代码的工程师，凝视着自己的作品，仿佛在看陌生人的代码。</p>
+<p><strong>代码的生产成本已远低于其感知成本。</strong></p>
+<p>这种失衡正是“认知债”（Cognitive Debt）的核心体现。在追求极致速度的过程中，我们往往牺牲了对代码深层逻辑的即时理解，将复杂性推向了未来。当未来到来时，偿还这笔债务的代价，往往远超当初节省下来的时间。</p>
+<h2 id="理解滞后">理解滞后</h2>
+<p>当工程师手动编写代码时，会同时发生两个并行过程。</p>
+<p>第一个是<strong>生产（Production）</strong>：字符被写入文件，测试用例被编写，系统随之发生变化。</p>
+<p>第二个是<strong>吸收（Absorption）</strong>：心智模型逐渐形成，边缘情况变得直观，架构关系固化为深刻的理解。</p>
+<p>这两个过程原本是紧密耦合的。打字的行为迫使大脑保持活跃，而实施过程中的摩擦感（Friction）恰恰为深度推理创造了空间。</p>
+<p>然而，人工智能辅助开发将这两个过程**解耦（Decouples）**了。</p>
+<p>一条提示（Prompt）能在几秒钟内生成数百行代码。工程师随后进行审查、调整与迭代，输出速度急剧提升。但<strong>吸收过程无法以同样的比例加速</strong>。真正理解“构建了什么”、“为何如此构建”以及“它与其他组件的关系”所需的认知工作，仍然受限于人类的处理速度。</p>
+<p><strong>输出速度与理解速度之间的差距，就是认知债务（Cognitive Debt）。</strong></p>
+<p>与通常通过系统故障或维护成本暴露出来的技术债务不同，<strong>认知债务在速度指标下依然是不可见的</strong>。</p>
+<p>代码运行正常，测试全部通过，功能如期发布。这种缺陷仅存在于构建系统的工程师心中，表现为对自己所写代码的不确定性。</p>
+<p>但这笔债务并非真正“隐形”。它最终会体现在可靠性指标上：平均恢复时间（MTTR）被拉长，变更失败率（Change Failure Rate）悄然攀升。然而，这些都是滞后指标，与驱动季度决策的速度指标之间往往相隔数月。等到 MTTR 发出问题信号时，理解上的缺陷早已<strong>滚雪球般加剧</strong>。</p>
+<h2 id="组织实际衡量什么">组织实际衡量什么</h2>
+<p>工程绩效体系的演进旨在衡量<strong>可观测的产出</strong>。故事点（Story Points）的完成量、功能（Features）的交付、代码提交（Commits）的合并、以及代码审查的周转时间。这些指标诞生于一个<strong>产出与理解紧密耦合</strong>的时代，在那个时代，交付某物本身就意味着对其有所理解。</p>
+<p>这些指标从未直接衡量理解力，因为理解力被视为理所当然。发布功能的工程师被认为<strong>掌握了该功能</strong>。这种预设之所以成立，是因为<strong>生产过程本身迫使人们去理解</strong>。</p>
+<p><strong>这种预设已不再成立。</strong> 如今的工程师可以在仅保持对实现细节<strong>表面熟悉</strong>的情况下发布功能。这些功能确实能正常工作，指标也记录了成功。然而，传统上会伴随这些功能积累的组织知识，其形成速度却完全跟不上。</p>
+<p>绩效校准委员会看到了速度的提升，却<strong>看不到理解力的缺失</strong>。他们无法做到这一点，因为组织测量系统中的任何<strong>工件</strong>都无法捕获这一维度。</p>
+<h2 id="审稿人的困境">审稿人的困境</h2>
+<p>关于“认知债务”（Cognitive Debt）的讨论，通常聚焦于编写代码的工程师。然而，更为严峻的问题其实在于<strong>审查代码的工程师</strong>。</p>
+<p>代码审查（Code Review）最初演变为一种质量门禁（Quality Gate）。资深工程师检查初级工程师的工作成果，旨在发现错误、提出改进建议并传授知识。在此模式下，限制整体效率的瓶颈始终是初级工程师的产出速度，因为资深工程师的审阅速度远快于初级工程师的编码速度。</p>
+<p>人工智能辅助开发（AI-assisted development）彻底颠覆了这一关系。<strong>初级工程师现在生成代码的速度，已经超过了资深工程师进行批判性审计（critical audit）的速度。</strong> 生成的代码量已经超出了可用于深入审查的带宽。在这种局面下，必须有所妥协，而通常牺牲的是审查的深度。</p>
+<p>审稿人因此面临着一个两难的抉择：</p>
+<ul>
+<li>维持原有的审查标准，从而成为阻碍效率提升的瓶颈，抵消人工智能带来的速度增益；</li>
+<li>或者按照代码到达的速度直接批准，寄希望于测试用例能够捕获审查所遗漏的问题。</li>
+</ul>
+<p>大多数人往往无意识地选择后者，因为组织的压力更倾向于追求吞吐量（throughput）。</p>
+<p>这正是认知债务加速累积（compound）的领域。作者（即代码编写者）的理解缺陷或许可以通过后续接触代码来弥补。但审稿人的理解缺陷却会蔓延：他们批准了自己并不完全理解的代码，而这些代码因此获得了隐式的背书（implicit endorsement）。<strong>“经过审查的代码即被理解的代码”这一组织假设，已不再成立。</strong></p>
+<h2 id="倦怠模式">倦怠模式</h2>
+<p>广泛使用 AI 工具的工程师报告了一种与传统倦怠截然不同的特定疲惫形式。传统倦怠源于持续的认知负荷，即在解决复杂问题时需要在脑海中承载过多信息；而新的模式则源于一种更接近**认知脱节（Cognitive Disconnection）**的状态。</p>
+<p>工作推进得极快，进展肉眼可见。但工程师始终感到一种难以掌控自己产出的无力感。他们能够执行操作，但若要解释其原理，却需要重新构建逻辑；他们能够修改代码，但预测行为却变得不可靠。即便系统运行正常，他们构建的系统在感觉上却略显<strong>陌生</strong>。</p>
+<p>这种状态形成了一种独特的心理困境：<strong>高产出与低信心并存</strong>。工程师的产出量在增加，但对自己产出的确定性却在下降。在那些基于可见产出进行排名（Stack-rank）的组织中，这种不确定性加剧了继续产出的压力，迫使工程师在迷茫中持续工作。</p>
+<p>那些停下来深入理解自己构建内容的工程师，在速度指标上往往落后；而那些将吞吐量（Throughput）置于理解之上的工程师，虽然能达成季度目标，却付出了代价。<strong>激励结构实际上筛选并强化了那些加速认知债务积累的行为。</strong></p>
+<h2 id="当组织记忆失效时">当组织记忆失效时</h2>
+<p>工程组织中的知识以两种形式存在：一种是<strong>显性知识</strong>，包括文档、设计图纸和记录下来的决策；另一种是<strong>隐性知识</strong>，即那些在长期构建和维护系统的工程师心中所持有的深刻理解。</p>
+<p>隐性知识之所以难以完全外化，是因为它很大程度上体现为<strong>直觉、模式识别以及情境判断</strong>，这些能力是在直接参与实际工作中逐步磨砺而成的。</p>
+<p>当构建系统的核心人员离职或轮换至新项目时，这些宝贵的隐性知识便会随之流失。传统上，组织依靠正常的工程迭代流程来补充这些知识：新工程师在基于现有系统进行开发的过程中，通过代码实现的“摩擦”逐渐建立起自己的隐性理解。</p>
+<p>然而，<strong>AI 辅助开发可能会切断这一补充机制</strong>。如果新工程师能够在缺乏深度理解的情况下，仅凭 AI 生成可运行的代码修改，他们便无法形成传统模式下会自然积累的隐性知识。<strong>组织面临的不仅是人员流失带来的知识断层，更是由于新成员未能有效形成知识储备而导致的“形成不足”。</strong></p>
+<p>这种机制失效会导致一种<strong>延迟的故障模式</strong>出现：系统照常运行，新功能持续发布，但真正理解系统底层逻辑的人员储备却在逐渐枯竭。</p>
+<p>一旦环境变化迫使组织必须调用这种深层理解——例如系统以意想不到的方式发生故障，或者需求变更需要架构层面的推理时——组织才会猛然发现自身早已存在的知识赤字。</p>
+<h2 id="债务如何复合">债务如何复合</h2>
+<p>随着认知债务（Cognitive Debt）的积累，会出现三种典型的失败模式。</p>
+<p>第一种模式涉及<strong>通常可靠的启发式判断的逆转</strong>。工程师通常信任那些已在生产环境中运行多年的代码：如果代码能存活这么久，它大概率是可靠的；代码存在的时间越长且未引发问题，它所获得的信任度就越高。然而，人工智能生成的代码彻底颠倒了这一规律。<strong>它保持不动的时间越长，就越危险</strong>，因为围绕它的开发者群体的上下文窗口（Context Window）已经完全关闭。那些在编写时几乎不被理解的代码，一旦编写者离开，便会变得完全不透明。</p>
+<p>第二种失败模式在事故发生时才会浮现。凌晨 3:00 警报响起，值班工程师打开一个并非他们构建的系统，该系统由他们未曾监督的工具生成，且文档撰写方式预设了读者具备他们并不拥有的熟悉度。<strong>他们正在调试一个由黑匣子编写的黑匣子。</strong> 对于理解系统的人来说，原本只需十分钟的修复工作，在无人理解的情况下会变成长达四小时的取证调查。若将此类情况乘以足够多的事故，累积的成本将远远超过人工智能辅助开发所带来的速度增益。</p>
+<p>第三种失败模式的作用时间跨度更长。那些主要依赖人工智能辅助开发的初级工程师，永远无法培养出源自手动实现的直觉。他们在交付功能时，并未形成能够指导架构判断的“疤痕组织”（Scar Tissue）。该组织实际上是在用未来的高级工程师储备来交换本季度的功能交付。这种成本并未体现在当前的人员编制模型中，因为那些本应在五年后成为高级架构师的人才尚未缺席，<strong>他们根本就不会形成</strong>。</p>
+<h2 id="领导的观点">领导的观点</h2>
+<p>从工程领导层的视角来看，AI 辅助开发表现为生产力的提升。团队交付速度加快，产品路线图得以压缩，人员编制讨论也变得更加乐观。这些可观察到的信号会通过组织汇报结构向上传递。</p>
+<p>然而，在这些团队中不断累积的**认知债务（Cognitive Debt）**并不会发出任何信号。目前缺乏衡量“无需重新阅读即可解释自己代码的工程师”这一指标的机制，也没有针对“组织理解深度”的仪表盘。这一概念无法融入季度业务审查（QBR）的格式，也不适合用于人员编制的合理性论证。</p>
+<p>董事层依据可观察到的信号做出决策。当这些信号一致表明成功时，在领导层所能获取的信息环境下，坚持采用产生这些信号的方法是理性的。<strong>基于现有数据，这一决策并非错误；问题在于数据本身是不完整的。</strong></p>
+<h2 id="该模型失效的边界">该模型失效的边界</h2>
+<p>认知债务（Cognitive Debt）这一框架并非适用于所有工程场景。</p>
+<p>某些任务本质上是机械性的（mechanical），无需深层理解即可执行；某些代码库确实能从快速迭代中获益，而无需对架构进行深度剖析；某些功能也根本不需要达到传统手动实现（manual implementation）所要求的那种理解水平。</p>
+<p>此外，该模型还隐含了一个假设：即理解能力此前一直是以足够的速率在形成的。这一假设或许过于乐观。工程师对自己工作的理解深度向来参差不齐，这种分布可能仅仅是发生了偏移，而非出现了某种全新的现象。</p>
+<p>同时，工具链（tooling）与文档实践（documentation practices）的演进，也可能部分弥合理解上的鸿沟。如果组织能够开发出有效的方法，去捕捉并传递那些由 AI 辅助开发所未能自然形成的理解，那么这种“债务”或许是可以管理的，而非单纯地不断累积。</p>
+<h2 id="测量问题">测量问题</h2>
+<blockquote>
+<p>系统正在针对其测量的内容进行正确优化。它衡量的内容不再反映重要的内容。</p>
+</blockquote>
+<p>根本挑战在于，<strong>组织无法针对无法衡量的事物进行优化</strong>。速度是可量化的，但理解（Comprehension）并非如此，或者至少目前没有任何机制能将“理解”纳入绩效评估、晋升决策或人员规划体系中。</p>
+<p>在“理解”变得能够被组织决策系统所识别之前，激励结构将继续偏向于速度。那些优先考虑理解而非产出（Output）的工程师，在绩效表现上会显得不如那些优先考虑产出而非理解的同行。绩效校准机制将奖励那些加速积累技术债务的行为。</p>
+<p>这并非个别经理或工程师的失败。这是一个为“生产与理解相互耦合”的时代而设计的测量系统，却运行在一个这种耦合关系已不复存在的时代。<strong>系统正在针对其测量的内容进行正确优化。它衡量的内容不再反映重要的内容。</strong></p>
+<p>这种差距终将显现。它可能表现为超出预期的维护成本，表现为需要无人具备理解能力才能处理的事件，或者表现为新需求暴露出那些未经深入理解而构建的系统所固有的脆弱性。差距显现的时间点和具体形式尚不确定，但其背后的动态机制却清晰无疑。</p>
+<blockquote>
+<p>原文标题：Cognitive Debt: When Velocity Exceeds Comprehension
+作者：Ganesh Pagade
+原文链接：<a href="https://www.rockoder.com/beyondthecode/cognitive-debt-when-velocity-exceeds-comprehension/">https://www.rockoder.com/beyondthecode/cognitive-debt-when-velocity-exceeds-comprehension/</a>
+本文为翻译作品，版权归原作者所有。</p>
+</blockquote>
+<blockquote>
+<p>本文深入探讨了“认知债务”（Cognitive Debt）在组织中的具体表现与危害。文章指出，当开发速度超过团队的理解能力时，会导致严重的理解滞后与组织记忆失效。通过剖析审稿人的困境与倦怠模式，揭示了这种债务如何随时间复利增长，最终导致技术债务模型在特定条件下崩塌。</p>
+</blockquote>
+<h2 id="译者总结">译者总结</h2>
+<p>本文揭示了在高速度开发环境下，组织往往无法跟上代码变化的理解速度，从而积累了难以偿还的认知债务。这种债务不仅导致团队倦怠，更使得组织的集体记忆逐渐失效，最终威胁到系统的长期可维护性。管理者必须正视这一模型在测量与执行层面的局限性，以避免技术债务的无限累积。</p>
+</div>
+        </div>
+            
+            
+        </body>
+        </html>

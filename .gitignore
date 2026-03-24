@@ -7,5 +7,13 @@ venv/
 *.egg-info/
 dist/
 build/
+.build/
+.swiftpm/
+.swift-home/
+.swiftpm-cache/
 .idea/
 .vscode/
+logs/
+
+# 翻译中间文件（机翻原始结果，仅用于本地对照检查）
+**/raw_translated.md

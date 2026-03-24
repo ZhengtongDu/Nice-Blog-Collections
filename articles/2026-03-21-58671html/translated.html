@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You Should Use /tmp/ More</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f5efe5;
+      --surface: rgba(255, 252, 247, 0.92);
+      --panel: rgba(255, 255, 255, 0.78);
+      --border: rgba(99, 80, 51, 0.16);
+      --title: #2d1f12;
+      --body: #4a3723;
+      --muted: #7d6850;
+      --accent: #9a4f19;
+      --code-bg: #f3ebe0;
+      --quote-bg: #f8f2ea;
+      --shadow: 0 22px 60px rgba(88, 54, 18, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, rgba(202, 120, 48, 0.22), transparent 34%),
+        radial-gradient(circle at top right, rgba(138, 95, 54, 0.14), transparent 30%),
+        linear-gradient(180deg, #fbf7f1 0%, var(--bg) 100%);
+      color: var(--body);
+      font-family: "PingFang SC", "Hiragino Sans GB", "Noto Serif CJK SC",
+        "Source Han Serif SC", "Songti SC", serif;
+      line-height: 1.85;
+    }
+
+    body {
+      padding: 40px 20px 64px;
+    }
+
+    main {
+      width: min(860px, 100%);
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 48px 56px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--title);
+      font-family: "PingFang SC", "SF Pro Display", sans-serif;
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+      margin: 1.7em 0 0.65em;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.55rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid rgba(154, 79, 25, 0.10);
+    }
+
+    p, ul, ol, blockquote, pre {
+      margin: 1em 0;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(154, 79, 25, 0.24);
+    }
+
+    strong {
+      color: var(--title);
+      font-weight: 700;
+    }
+
+    code {
+      font-family: "SF Mono", "JetBrains Mono", monospace;
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 0.15em 0.4em;
+      font-size: 0.92em;
+    }
+
+    pre {
+      background: #20150c;
+      color: #f8f3ed;
+      padding: 18px 20px;
+      border-radius: 16px;
+      overflow-x: auto;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    blockquote {
+      margin-left: 0;
+      padding: 18px 22px;
+      background: var(--quote-bg);
+      border-left: 4px solid rgba(154, 79, 25, 0.48);
+      border-radius: 16px;
+      color: var(--muted);
+    }
+
+    ul, ol {
+      padding-left: 1.4rem;
+    }
+
+    li + li {
+      margin-top: 0.45rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid rgba(154, 79, 25, 0.18);
+      margin: 2rem 0;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      border-radius: 18px;
+      margin: 1.5rem auto;
+      box-shadow: 0 16px 30px rgba(48, 26, 4, 0.12);
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 18px 12px 30px;
+      }
+
+      main {
+        padding: 28px 22px;
+        border-radius: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <blockquote><p>原文标题：You Should Use /tmp/ More 作者：Unknown 原文链接：https://atthis.link/blog/2025/58671.html 本文为翻译作品，版权归原作者所有。</p>
+<p>挖掘文件系统往往并非乐趣所在，大多数人更倾向于安守 <code>/home/</code> 目录。然而，适当探索系统提供的其他功能并尝试在新语境下思考它们，却能带来意想不到的收益。本文重点推荐了一个常被忽视的目录——<code>/tmp/</code>，它专为临时文件设计，会在系统重启时自动清空。作者通过将其作为下载目录、临时工作区及草稿本，有效解决了文件堆积和空间浪费的问题。通过利用 <code>/tmp/</code> 的临时特性，用户可以更清晰地界定哪些数据需要长期保存，哪些可以安全丢弃，从而构建一个自我整理的数字工作空间。</p></blockquote>
+<h2>你应该更多地使用 <code>/tmp/</code></h2>
+<p>挖掘文件系统可能并非许多人的乐趣所在，大多数人满足于生活在 <code>/home/</code> 目录中，仅此而已。但是，进行一些探索，看看你的机器提供了哪些其他功能，并尝试在新的语境下思考它们，可能会有好处。</p>
+<p>我认为真正应该得到更多关注、且我不断发现新用例的目录是 <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s18.html">ZZZTOKENPLACEHOLDER0ZZZ</a>。<code>/tmp/</code> 专为临时文件设计，通常是程序长期不需要的“东西”的归宿：你正在处理文件的临时备份、浏览器缓存的内容、正在进行的更新暂存区等。<code>/tmp/</code> 还有一个独特的好处：<strong>每当你的机器重置时，它都会被自动清除</strong>——毕竟它是临时的。</p>
+<p><code>/tmp/</code> 主要是作为软件执行诸如上述操作的空间，但没有任何限制阻止你将其用于自己的目的。因此，在过去的几年里，我确实将 <code>/tmp/</code> 深度集成到了常规使用中，并取得了令人惊讶的效果。</p>
+<h3>将下载目录设为 <code>/tmp/</code></h3>
+<p>我发现最强大的用途之一是将下载文件夹设置为 <code>/tmp/</code>。根据我的经验以及观察他人的做法，默认的“下载”文件夹似乎就像一个永远不会被清空的垃圾箱。千兆字节的数据就静静地躺在一个完全被遗忘的文件夹中：为什么我仍然保留着十多年前的 Ubuntu 12.04 ISO 文件？为什么几年前完成的项目还留在这里？尽管我使用 Linux 已有十多年，但那些 <code>.exe</code> 文件似乎依然存在。</p>
+<p>挖掘自己的下载文件夹就像在翻阅一个令人着迷的时间胶囊，但你不必像进行考古挖掘一样偶然撞见这些文件。<code>/tmp/</code> 是发送下载的绝佳位置。</p>
+<ul><li><strong>打印包装标签</strong>？将其发送到 <code>/tmp/</code>，打印出来，然后将其遗忘，而不是让它滞留在下载文件夹中。</li><li><strong>快速项目素材</strong>？有想要在 <a href="https://www.gimp.org">GIMP</a> 中快速项目使用的图像吗？将其放入 <code>/tmp/</code>，而不是几年后还在疑惑为什么系统里会有一个看似随机的 JPEG 文件。</li></ul>
+<h3>提升“严肃”工作的效率</h3>
+<p>利用 <code>/tmp/</code> 作为我一般工作流程的一部分，对于更“严肃”的工作也出奇地有效。</p>
+<p>特别是在进行研究时，我可能需要翻阅数百份 PDF 格式的研究论文。我可以将所有这些文件下载到我的 <code>/tmp/</code> 文件夹，然后直接开始处理。它们不存在被丢弃在文件夹中并被遗忘的风险，也不存在完成后继续占用空间的风险。</p>
+<p>为项目处理数据集？将其放入 <code>/tmp/</code>。当你回来继续工作时，只需下载最新版本即可。没有稳定地积累 <code>v1</code>、<code>v2</code>、<code>v2_final</code> 等版本文件。</p>
+<h3>完美的草稿本与 TODO 清单</h3>
+<p>快速 TODO 和其他类似草稿本的内容也非常适合 <code>/tmp/</code>。我过去常常只是在我的主目录中创建注释文件，例如 <code>monday.md</code> 或 <code>2023-03-05.txt</code>，记录当天需要完成的事项。<code>/tmp/</code> 继续非常适合这种用途。我可以从在 <code>/tmp/</code> 中创建一个文本文件开始新的一天，填入当天需要完成的工作，然后在关闭机器时将其自动清除。</p>
+<h3>优化 LaTeX 编译流程</h3>
+<p>我经常使用 LaTeX，它在编译文档时会生成大量文件：目录文件、参考文献文件、生成 PDF 过程中的中间 DVI 文件、生成的 PDF 等。这些文件确实有用，保持它们随时可用可以加快未来的编译速度，但更多时候我真的不需要它们。</p>
+<p>因此，我可以在 <code>pdflatex</code> 命令中添加 <code>-output-directory=/tmp/</code> 参数，将所有临时文件归位：</p>
+<pre><code class="language-bash">pdflatex -output-directory=/tmp/</code></pre>
+<p>这确实也会将生成的 PDF 放入 <code>/tmp/</code>，但通常我只希望保留源代码，并仅在需要时重新编译文档，从而节省空间。</p>
+<h3>构建自我整理的工作空间</h3>
+<p>虽然我在这里建议的任何想法都可以在组织良好的常规文件系统中实现，但在 <code>/tmp/</code> 中工作时，很难忽视那种“所有未保存的内容都将丢失”的温和推动。</p>
+<p>大量使用 <code>/tmp/</code> 迫使你围绕机器上真正重要的内容做出决定：是保留机器上发生过的所有事情的副本，还是将真正需要的内容长期存储，而将其他所有内容视为一次性消耗品？这是一个自我整理的工作空间，没有随机文件最终闲置在系统中的烦恼。</p>
+<p><code>/tmp/</code> 提供了许多令人惊讶的应用，这些应用纯粹源于它是临时的这一事实。</p>
+<ul><li>它通过自动删除不需要的文件来帮助监控存储使用情况。</li><li>它通过固有地清理不需要的内容来保持整个文件系统的整洁。</li></ul>
+<p>因此，请考虑尝试使用 <code>/tmp/</code>。如果它不适合你，你只需在下次重启后重新开始即可。</p>
+<h2>译者总结</h2>
+<p><strong>/tmp/</strong> 目录不仅是系统清理的垃圾场，更是构建高效、整洁个人工作流的利器。通过利用其自动清空的特性，我们可以强制自己区分“临时数据”与“长期资产”，从而避免数字囤积，让存储空间始终服务于当前的核心任务。</p>
+  </main>
+</body>
+</html>
