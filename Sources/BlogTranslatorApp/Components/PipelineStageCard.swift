@@ -27,6 +27,7 @@ struct PipelineStageCard: View {
             Image(systemName: symbol)
                 .font(.title2.weight(.semibold))
                 .foregroundStyle(accent)
+                .symbolEffect(.pulse, isActive: state == .active)
 
             Text(stage.title)
                 .font(.headline)
@@ -40,12 +41,15 @@ struct PipelineStageCard: View {
         .padding(18)
         .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(Color.white.opacity(0.82))
+                .fill(state == .active
+                    ? Color.orange.opacity(0.08)
+                    : Color(nsColor: .controlBackgroundColor).opacity(0.82))
         )
         .overlay(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
                 .stroke(accent.opacity(0.22), lineWidth: 1)
         )
         .shadow(color: accent.opacity(0.08), radius: 22, y: 12)
+        .animation(.easeInOut(duration: 0.35), value: state)
     }
 }

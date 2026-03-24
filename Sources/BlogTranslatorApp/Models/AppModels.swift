@@ -172,6 +172,7 @@ struct WorkerAcknowledgement: Codable {
     let status: String?
     let accepted: Bool?
     let jobId: String?
+    let deleted: Bool?
 }
 
 struct DuplicateCheckResult: Codable {

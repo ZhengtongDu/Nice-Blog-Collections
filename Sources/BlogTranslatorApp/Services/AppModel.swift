@@ -250,6 +250,30 @@ final class AppModel: ObservableObject {
         ])
     }
 
+    func deleteArticle(_ articleID: String) async {
+        do {
+            _ = try await worker.request(
+                "delete_article",
+                params: ["articleId": articleID],
+                as: WorkerAcknowledgement.self
+            )
+            if activeArticle?.id == articleID {
+                activeArticle = nil
+                editorText = ""
+            }
+            if selectedLibraryArticleID == articleID {
+                selectedLibraryArticleID = nil
+            }
+            if selectedReviewArticleID == articleID {
+                selectedReviewArticleID = nil
+            }
+            try await refreshArticles()
+            transientMessage = "文章已删除"
+        } catch {
+            workerErrorMessage = error.localizedDescription
+        }
+    }
+
     func openLogsFolder() {
         guard !health.logsDir.isEmpty else { return }
         NSWorkspace.shared.activateFileViewerSelecting([

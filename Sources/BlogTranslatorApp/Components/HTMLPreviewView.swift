@@ -18,7 +18,7 @@ struct HTMLPreviewView: NSViewRepresentable {
               let readAccessDirectory else {
             nsView.loadHTMLString(
                 """
-                <html><body style="font-family:-apple-system;padding:32px;color:#7d6850;background:#fbf7f1;">
+                <html><body style="font-family:-apple-system;padding:32px;color:gray;background:transparent;">
                 暂无可预览内容。
                 </body></html>
                 """,

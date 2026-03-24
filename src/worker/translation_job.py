@@ -216,7 +216,7 @@ class TranslationJob:
 
     def _execute_pipeline(self) -> Path:
         self._advance("check_ollama", 2, "检查 Ollama 与模型状态")
-        health = probe_ollama(test_generate=True)
+        health = probe_ollama(test_generate=False)
         if not health["ollamaReachable"]:
             raise RuntimeError(health["message"] or "Ollama 服务不可用")
         if not health["modelInstalled"]:

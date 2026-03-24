@@ -22,6 +22,7 @@ enum ArticleWorkspaceKind {
 struct ArticleWorkspaceView: View {
     @ObservedObject var model: AppModel
     let kind: ArticleWorkspaceKind
+    @State private var articleToDelete: ArticleSummary?
 
     private var selection: Binding<String?> {
         Binding(
@@ -63,7 +64,24 @@ struct ArticleWorkspaceView: View {
             inspectorPane
                 .frame(minWidth: 220, idealWidth: 250, maxWidth: 280)
         }
-        .background(Color(red: 0.97, green: 0.95, blue: 0.91))
+        .background(Color(nsColor: .windowBackgroundColor))
+        .alert(
+            "确认删除",
+            isPresented: Binding(
+                get: { articleToDelete != nil },
+                set: { if !$0 { articleToDelete = nil } }
+            )
+        ) {
+            Button("删除", role: .destructive) {
+                if let article = articleToDelete {
+                    Task { await model.deleteArticle(article.id) }
+                }
+                articleToDelete = nil
+            }
+            Button("取消", role: .cancel) { articleToDelete = nil }
+        } message: {
+            Text("将永久删除「\(articleToDelete?.title ?? "")」及其所有文件。此操作不可撤销。")
+        }
     }
 
     private var sidebarPane: some View {
@@ -92,8 +110,20 @@ struct ArticleWorkspaceView: View {
 
             if articles.isEmpty {
                 Spacer()
-                Text(kind.emptyMessage)
-                    .foregroundStyle(.secondary)
+                VStack(spacing: 14) {
+                    Image(systemName: kind == .library ? "books.vertical" : "checklist")
+                        .font(.system(size: 38))
+                        .foregroundStyle(.tertiary)
+                    Text(kind.emptyMessage)
+                        .foregroundStyle(.secondary)
+                    if kind == .library {
+                        Button("翻译第一篇文章") {
+                            model.selectedSection = .translate
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                }
+                .frame(maxWidth: .infinity)
                 Spacer()
             } else {
                 List(selection: selection) {
@@ -110,12 +140,33 @@ struct ArticleWorkspaceView: View {
                                     StatusBadge(title: status.title, tint: color(for: status))
                                 }
                             }
-                            Text(article.added)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                            HStack(spacing: 8) {
+                                Text(article.added)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                if let host = URL(string: article.sourceURL)?.host {
+                                    Text(host)
+                                        .font(.caption2)
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 2)
+                                        .background(Color.secondary.opacity(0.12), in: Capsule())
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
                         }
                         .padding(.vertical, 4)
                         .tag(Optional(article.id))
+                        .contextMenu {
+                            Button("在 Finder 中打开") {
+                                NSWorkspace.shared.activateFileViewerSelecting([
+                                    URL(fileURLWithPath: article.directoryPath)
+                                ])
+                            }
+                            Divider()
+                            Button("删除", role: .destructive) {
+                                articleToDelete = article
+                            }
+                        }
                     }
                 }
                 .listStyle(.sidebar)
@@ -195,7 +246,7 @@ struct ArticleWorkspaceView: View {
             .padding(14)
             .background(
                 RoundedRectangle(cornerRadius: 24, style: .continuous)
-                    .fill(Color.white.opacity(0.78))
+                    .fill(Color(nsColor: .textBackgroundColor).opacity(0.78))
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 24, style: .continuous)
@@ -211,7 +262,7 @@ struct ArticleWorkspaceView: View {
         )
         .background(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.white.opacity(0.62))
+                .fill(Color(nsColor: .controlBackgroundColor).opacity(0.62))
         )
         .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
         .overlay(
@@ -254,6 +305,18 @@ struct ArticleWorkspaceView: View {
                         ActionButton(title: "在 Finder 中打开", systemImage: "folder") {
                             model.openCurrentArticleFolder()
                         }
+
+                        Divider()
+
+                        Button(role: .destructive) {
+                            if let summary = model.allArticles.first(where: { $0.id == article.id }) {
+                                articleToDelete = summary
+                            }
+                        } label: {
+                            Label("删除文章", systemImage: "trash")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .buttonStyle(.bordered)
                     }
 
                     metadataRow("作者", article.author)

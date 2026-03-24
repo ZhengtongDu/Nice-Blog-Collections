@@ -155,6 +155,14 @@ class WorkerServer:
             self._send_event("articles_changed", {"reason": "status_updated"})
             return result
 
+        if command == "delete_article":
+            article_id = params.get("articleId")
+            if not article_id:
+                raise ValueError("缺少 articleId 参数")
+            result = self.store.delete_article(article_id)
+            self._send_event("articles_changed", {"reason": "article_deleted"})
+            return result
+
         if command == "export_article_html":
             article_id = params.get("articleId")
             if not article_id:

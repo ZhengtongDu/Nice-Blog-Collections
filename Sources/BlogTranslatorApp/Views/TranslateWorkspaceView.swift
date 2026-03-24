@@ -39,19 +39,12 @@ struct TranslateWorkspaceView: View {
                 }
                 .padding(26)
                 .background(
-                    LinearGradient(
-                        colors: [
-                            Color(red: 0.99, green: 0.95, blue: 0.90),
-                            Color(red: 0.94, green: 0.88, blue: 0.80),
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
+                    Color(nsColor: .controlBackgroundColor),
                     in: RoundedRectangle(cornerRadius: 28, style: .continuous)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 28, style: .continuous)
-                        .stroke(Color(red: 0.61, green: 0.34, blue: 0.15).opacity(0.14), lineWidth: 1)
+                        .stroke(Color.primary.opacity(0.08), lineWidth: 1)
                 )
 
                 if let job = model.activeJob {
@@ -96,7 +89,7 @@ struct TranslateWorkspaceView: View {
                         }
                     }
                     .padding(18)
-                    .background(Color.white.opacity(0.7), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .background(Color(nsColor: .controlBackgroundColor).opacity(0.7), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
                 }
 
                 LazyVGrid(columns: columns, spacing: 16) {
@@ -125,20 +118,11 @@ struct TranslateWorkspaceView: View {
                     .frame(minHeight: 220)
                 }
                 .padding(20)
-                .background(Color.white.opacity(0.72), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+                .background(Color(nsColor: .controlBackgroundColor).opacity(0.72), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
             }
             .padding(28)
         }
-        .background(
-            LinearGradient(
-                colors: [
-                    Color(red: 0.97, green: 0.95, blue: 0.91),
-                    Color(red: 0.93, green: 0.89, blue: 0.84),
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
+        .background(Color(nsColor: .windowBackgroundColor))
         .alert("文章已存在", isPresented: $model.showDuplicateAlert) {
             Button("仍然翻译") {
                 Task { await model.startTranslation(skipDuplicateCheck: true) }

@@ -60,7 +60,7 @@ struct SettingsView: View {
             }
             .padding(28)
         }
-        .background(Color(red: 0.97, green: 0.95, blue: 0.91))
+        .background(Color(nsColor: .windowBackgroundColor))
     }
 
     private func settingsCard<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
@@ -71,7 +71,7 @@ struct SettingsView: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.white.opacity(0.72), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .background(Color(nsColor: .controlBackgroundColor).opacity(0.72), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
     }
 
     private func settingsValue(label: String, value: String) -> some View {

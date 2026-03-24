@@ -179,6 +179,12 @@ class ArticleStore:
             "updatedAt": _now_iso(),
         }
 
+    def delete_article(self, article_id: str) -> dict[str, Any]:
+        import shutil
+        article_dir = self.resolve_article_dir(article_id)
+        shutil.rmtree(article_dir)
+        return {"articleId": article_id, "deleted": True}
+
     def export_article_html(self, article_id: str) -> dict[str, Any]:
         article_dir = self.resolve_article_dir(article_id)
         metadata = self._load_metadata(article_dir)

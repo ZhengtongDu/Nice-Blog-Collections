@@ -5,20 +5,13 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color(red: 0.98, green: 0.96, blue: 0.92),
-                    Color(red: 0.95, green: 0.90, blue: 0.84),
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+            Color(nsColor: .windowBackgroundColor)
+                .ignoresSafeArea()
 
             VStack(alignment: .leading, spacing: 24) {
                 Text("博文翻译助手")
                     .font(.system(size: 38, weight: .bold, design: .rounded))
-                    .foregroundStyle(Color(red: 0.22, green: 0.14, blue: 0.08))
+                    .foregroundStyle(.primary)
 
                 Text("先选择一个内容库目录。应用会在里面管理 `articles/`、`logs/` 和导出的 HTML 文件。")
                     .font(.title3)
@@ -84,6 +77,6 @@ private struct HealthChip: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
-        .background(Color.white.opacity(0.65), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .background(Color(nsColor: .controlBackgroundColor).opacity(0.65), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
