@@ -22,6 +22,10 @@ final class AppModel: ObservableObject {
     @Published var workerErrorMessage: String?
     @Published var transientMessage: String?
     @Published var previewReloadToken = UUID()
+    @Published var lastTranslatedURL = ""
+    @Published var completedArticleID: String?
+    @Published var showDuplicateAlert = false
+    @Published var duplicateArticles: [ArticleSummary] = []
 
     private let storageRootKey = "BlogTranslatorApp.storageRoot"
     private let worker = WorkerClient()
@@ -253,12 +257,30 @@ final class AppModel: ObservableObject {
         ])
     }
 
-    func startTranslation() async {
+    func startTranslation(skipDuplicateCheck: Bool = false) async {
         let url = translationURL.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !url.isEmpty else { return }
 
+        if !skipDuplicateCheck {
+            do {
+                let result: DuplicateCheckResult = try await worker.request(
+                    "check_duplicate",
+                    params: ["url": url]
+                )
+                if !result.duplicates.isEmpty {
+                    duplicateArticles = result.duplicates
+                    showDuplicateAlert = true
+                    return
+                }
+            } catch {
+                // check_duplicate failure is non-blocking; proceed with translation
+            }
+        }
+
         do {
             jobLogs = []
+            lastTranslatedURL = url
+            completedArticleID = nil
             activeJob = try await worker.request(
                 "start_translation",
                 params: ["url": url],
@@ -268,6 +290,17 @@ final class AppModel: ObservableObject {
         } catch {
             workerErrorMessage = error.localizedDescription
         }
+    }
+
+    func retryTranslation() async {
+        translationURL = lastTranslatedURL
+        await startTranslation(skipDuplicateCheck: true)
+    }
+
+    func navigateToCompletedArticle() {
+        guard let articleID = completedArticleID else { return }
+        selectedSection = .library
+        selectLibraryArticle(articleID)
     }
 
     func cancelTranslation() async {
@@ -318,6 +351,11 @@ final class AppModel: ObservableObject {
                 if snapshot.state == "completed" {
                     translationURL = ""
                     transientMessage = "翻译任务完成"
+                    if let outputDir = snapshot.outputDirectory {
+                        let articleID = URL(fileURLWithPath: outputDir).lastPathComponent
+                        completedArticleID = articleID
+                    }
+                    try? await refreshArticles()
                 }
             }
         case "job_log":

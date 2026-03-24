@@ -68,6 +68,32 @@ struct TranslateWorkspaceView: View {
                                 .foregroundStyle(.secondary)
                         }
                         ProgressView(value: Double(job.percent), total: 100)
+
+                        if job.state == "failed" {
+                            HStack(spacing: 12) {
+                                Button("重试") {
+                                    Task { await model.retryTranslation() }
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(.orange)
+
+                                if let errorSummary = job.errorSummary {
+                                    Text(errorSummary)
+                                        .font(.caption)
+                                        .foregroundStyle(.red)
+                                        .lineLimit(2)
+                                }
+                            }
+                            .padding(.top, 4)
+                        }
+
+                        if job.state == "completed", model.completedArticleID != nil {
+                            Button("查看文章") {
+                                model.navigateToCompletedArticle()
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .padding(.top, 4)
+                        }
                     }
                     .padding(18)
                     .background(Color.white.opacity(0.7), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
@@ -113,5 +139,14 @@ struct TranslateWorkspaceView: View {
                 endPoint: .bottomTrailing
             )
         )
+        .alert("文章已存在", isPresented: $model.showDuplicateAlert) {
+            Button("仍然翻译") {
+                Task { await model.startTranslation(skipDuplicateCheck: true) }
+            }
+            Button("取消", role: .cancel) {}
+        } message: {
+            let titles = model.duplicateArticles.map(\.title).joined(separator: "\n")
+            Text("该 URL 已翻译过以下文章：\n\(titles)\n\n确定要重新翻译吗？")
+        }
     }
 }

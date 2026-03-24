@@ -174,6 +174,11 @@ struct WorkerAcknowledgement: Codable {
     let jobId: String?
 }
 
+struct DuplicateCheckResult: Codable {
+    let url: String
+    let duplicates: [ArticleSummary]
+}
+
 enum PipelineStage: CaseIterable, Identifiable {
     case checkOllama
     case fetch

@@ -86,6 +86,18 @@ class ArticleStore:
                 return next_candidate
             index += 1
 
+    def find_by_source_url(self, url: str) -> list[dict[str, Any]]:
+        """Return summaries of articles whose source URL matches *url*."""
+        matches: list[dict[str, Any]] = []
+        for meta_path in self.paths.articles_dir.glob("*/metadata.yaml"):
+            try:
+                meta = self._load_metadata(meta_path.parent)
+            except Exception:
+                continue
+            if meta.get("source", "") == url:
+                matches.append(self._load_summary(meta_path.parent))
+        return matches
+
     def list_articles(
         self,
         status: str | None = None,

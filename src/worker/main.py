@@ -91,6 +91,13 @@ class WorkerServer:
             self._send_event("articles_changed", {"reason": "storage_root_updated"})
             return health
 
+        if command == "check_duplicate":
+            url = (params.get("url") or "").strip()
+            if not url:
+                raise ValueError("缺少 url 参数")
+            matches = self.store.find_by_source_url(url)
+            return {"url": url, "duplicates": matches}
+
         if command == "start_translation":
             if self._active_job and self._active_job.thread.is_alive():
                 raise RuntimeError("当前已有翻译任务正在进行中")
