@@ -96,6 +96,9 @@ struct ArticleSummary: Codable, Identifiable, Hashable {
     let sourceURL: String
     let directoryPath: String
     let htmlPath: String?
+    let series: String?
+    let parent: String?
+    let children: [String]?
 }
 
 struct ArticleDetail: Codable, Identifiable, Hashable {
@@ -112,6 +115,9 @@ struct ArticleDetail: Codable, Identifiable, Hashable {
     let rawTranslatedMarkdown: String
     var translatedMarkdown: String
     let images: [String]
+    let series: String?
+    let parent: String?
+    let children: [String]?
 }
 
 struct JobSnapshot: Codable, Equatable {
@@ -226,4 +232,61 @@ enum PipelineStage: CaseIterable, Identifiable {
         case .save: "写入文件并导出 HTML"
         }
     }
+}
+
+enum TranslateMode: String, CaseIterable, Identifiable {
+    case single
+    case discover
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .single: "单篇翻译"
+        case .discover: "发现链接"
+        }
+    }
+}
+
+struct DiscoveredLink: Codable, Identifiable, Hashable {
+    let url: String
+    let title: String
+    let alreadyExists: Bool
+
+    var id: String { url }
+}
+
+struct LinkDiscoveryResult: Codable {
+    let sourceURL: String
+    let pageTitle: String
+    let links: [DiscoveredLink]
+}
+
+struct BatchSnapshot: Codable, Equatable {
+    let batchId: String
+    let totalJobs: Int
+    let currentIndex: Int
+    let state: String
+    let currentURL: String?
+    let currentArticleTitle: String?
+    let succeeded: Int?
+    let failed: Int?
+}
+
+struct BatchJobProgress: Codable {
+    let batchId: String
+    let currentIndex: Int
+    let totalJobs: Int
+    let stage: String
+    let percent: Int
+    let message: String
+}
+
+struct BatchCompletedPayload: Codable {
+    let batchId: String
+    let totalJobs: Int
+    let succeeded: Int
+    let failed: Int
+    let articleIds: [String]
+    let state: String
 }

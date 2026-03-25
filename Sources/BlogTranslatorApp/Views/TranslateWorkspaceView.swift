@@ -14,26 +14,58 @@ struct TranslateWorkspaceView: View {
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Translate")
                         .font(.system(size: 32, weight: .bold, design: .rounded))
-                    Text("输入文章 URL，后台 Python worker 会负责抓取、翻译、润色和产物落盘。")
+
+                    Picker("模式", selection: $model.translateMode) {
+                        ForEach(TranslateMode.allCases) { mode in
+                            Text(mode.title).tag(mode)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(maxWidth: 240)
+
+                    Text(model.translateMode == .single
+                        ? "输入文章 URL，后台 Python worker 会负责抓取、翻译、润色和产物落盘。"
+                        : "输入目录页 URL，自动发现子链接，勾选后批量翻译。")
                         .font(.title3)
                         .foregroundStyle(.secondary)
 
                     HStack(spacing: 12) {
-                        TextField("https://example.com/blog-post", text: $model.translationURL)
-                            .textFieldStyle(.roundedBorder)
-                            .font(.body.monospaced())
+                        TextField(
+                            model.translateMode == .single
+                                ? "https://example.com/blog-post"
+                                : "https://example.com/guide/",
+                            text: $model.translationURL
+                        )
+                        .textFieldStyle(.roundedBorder)
+                        .font(.body.monospaced())
 
-                        Button("开始翻译") {
-                            Task { await model.startTranslation() }
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(model.translationURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-
-                        if model.activeJob?.state == "running" {
-                            Button("取消") {
-                                Task { await model.cancelTranslation() }
+                        if model.translateMode == .single {
+                            Button("开始翻译") {
+                                Task { await model.startTranslation() }
                             }
-                            .buttonStyle(.bordered)
+                            .buttonStyle(.borderedProminent)
+                            .disabled(model.translationURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+
+                            if model.activeJob?.state == "running" {
+                                Button("取消") {
+                                    Task { await model.cancelTranslation() }
+                                }
+                                .buttonStyle(.bordered)
+                            }
+                        } else {
+                            Button("发现链接") {
+                                Task { await model.discoverLinks() }
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .disabled(
+                                model.translationURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                                || model.isDiscovering
+                            )
+
+                            if model.isDiscovering {
+                                ProgressView()
+                                    .controlSize(.small)
+                            }
                         }
                     }
                 }
@@ -46,6 +78,139 @@ struct TranslateWorkspaceView: View {
                     RoundedRectangle(cornerRadius: 28, style: .continuous)
                         .stroke(Color.primary.opacity(0.08), lineWidth: 1)
                 )
+
+                // Link discovery results
+                if let discovery = model.discoveredLinks, model.translateMode == .discover {
+                    VStack(alignment: .leading, spacing: 14) {
+                        HStack {
+                            Text(discovery.pageTitle)
+                                .font(.headline)
+                            Spacer()
+                            Text("发现 \(discovery.links.count) 个链接")
+                                .foregroundStyle(.secondary)
+                        }
+
+                        if discovery.links.isEmpty {
+                            Text("未发现文章链接，请检查 URL 是否为目录页。")
+                                .foregroundStyle(.orange)
+                        } else {
+                            if discovery.links.count > 50 {
+                                Text("发现 \(discovery.links.count) 个链接，可能不是系列文章目录页，建议手动筛选。")
+                                    .font(.caption)
+                                    .foregroundStyle(.orange)
+                            }
+
+                            HStack {
+                                Button("全选") {
+                                    model.selectedDiscoveredURLs = Set(discovery.links.map(\.url))
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.small)
+                                Button("取消全选") {
+                                    model.selectedDiscoveredURLs = []
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.small)
+                            }
+
+                            ScrollView {
+                                LazyVStack(alignment: .leading, spacing: 8) {
+                                    ForEach(discovery.links) { link in
+                                        HStack(spacing: 10) {
+                                            Toggle("", isOn: Binding(
+                                                get: { model.selectedDiscoveredURLs.contains(link.url) },
+                                                set: { selected in
+                                                    if selected {
+                                                        model.selectedDiscoveredURLs.insert(link.url)
+                                                    } else {
+                                                        model.selectedDiscoveredURLs.remove(link.url)
+                                                    }
+                                                }
+                                            ))
+                                            .toggleStyle(.checkbox)
+                                            .labelsHidden()
+
+                                            VStack(alignment: .leading, spacing: 2) {
+                                                Text(link.title)
+                                                    .lineLimit(1)
+                                                Text(link.url)
+                                                    .font(.caption)
+                                                    .foregroundStyle(.secondary)
+                                                    .lineLimit(1)
+                                            }
+
+                                            Spacer()
+
+                                            if link.alreadyExists {
+                                                Text("已存在")
+                                                    .font(.caption2)
+                                                    .padding(.horizontal, 6)
+                                                    .padding(.vertical, 2)
+                                                    .background(Color.orange.opacity(0.15), in: Capsule())
+                                                    .foregroundStyle(.orange)
+                                            }
+                                        }
+                                        .padding(.vertical, 4)
+                                        Divider()
+                                    }
+                                }
+                            }
+                            .frame(maxHeight: 320)
+
+                            HStack(spacing: 12) {
+                                TextField("系列名称", text: $model.batchSeriesTitle)
+                                    .textFieldStyle(.roundedBorder)
+                                    .frame(maxWidth: 300)
+
+                                Button("批量翻译 (\(model.selectedDiscoveredURLs.count) 篇)") {
+                                    Task { await model.startBatchTranslation() }
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .disabled(model.selectedDiscoveredURLs.isEmpty)
+                            }
+                        }
+                    }
+                    .padding(18)
+                    .background(Color(nsColor: .controlBackgroundColor).opacity(0.7), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                }
+
+                // Batch progress
+                if let batch = model.activeBatch {
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            StatusBadge(title: "批量翻译", tint: .orange)
+                            Text("文章 \(batch.currentIndex)/\(batch.totalJobs)")
+                                .font(.headline.monospacedDigit())
+                            Spacer()
+                            if let title = batch.currentArticleTitle {
+                                Text(title)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        ProgressView(value: Double(batch.currentIndex), total: Double(batch.totalJobs))
+
+                        if !model.batchJobMessage.isEmpty {
+                            HStack {
+                                Text(model.batchJobMessage)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                Spacer()
+                                Text("\(model.batchJobPercent)%")
+                                    .font(.caption.monospacedDigit())
+                                    .foregroundStyle(.secondary)
+                            }
+                            ProgressView(value: Double(model.batchJobPercent), total: 100)
+                                .tint(.orange)
+                        }
+
+                        Button("取消批量翻译") {
+                            Task { await model.cancelBatch() }
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    .padding(18)
+                    .background(Color(nsColor: .controlBackgroundColor).opacity(0.7), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                }
 
                 if let job = model.activeJob {
                     VStack(alignment: .leading, spacing: 10) {

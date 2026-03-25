@@ -182,8 +182,64 @@ class ArticleStore:
     def delete_article(self, article_id: str) -> dict[str, Any]:
         import shutil
         article_dir = self.resolve_article_dir(article_id)
+        metadata = self._load_metadata(article_dir)
+
+        # Clean up series relationships
+        parent_id = metadata.get("parent")
+        if parent_id:
+            try:
+                parent_dir = self.resolve_article_dir(parent_id)
+                parent_meta = self._load_metadata(parent_dir)
+                children = parent_meta.get("children", [])
+                if article_id in children:
+                    children.remove(article_id)
+                    parent_meta["children"] = children
+                    self._write_metadata(parent_dir, parent_meta)
+            except (FileNotFoundError, Exception):
+                pass
+
+        children_ids = metadata.get("children", [])
+        for child_id in children_ids:
+            try:
+                child_dir = self.resolve_article_dir(child_id)
+                child_meta = self._load_metadata(child_dir)
+                child_meta.pop("parent", None)
+                self._write_metadata(child_dir, child_meta)
+            except (FileNotFoundError, Exception):
+                pass
+
         shutil.rmtree(article_dir)
         return {"articleId": article_id, "deleted": True}
+
+    def update_series_metadata(
+        self,
+        parent_id: str | None,
+        child_ids: list[str],
+        series_title: str,
+    ):
+        """Write series/parent/children fields across related articles."""
+        for child_id in child_ids:
+            try:
+                child_dir = self.resolve_article_dir(child_id)
+                meta = self._load_metadata(child_dir)
+                meta["series"] = series_title
+                if parent_id:
+                    meta["parent"] = parent_id
+                self._write_metadata(child_dir, meta)
+            except (FileNotFoundError, Exception):
+                pass
+
+        if parent_id:
+            try:
+                parent_dir = self.resolve_article_dir(parent_id)
+                meta = self._load_metadata(parent_dir)
+                existing = meta.get("children", [])
+                merged = list(dict.fromkeys(existing + child_ids))
+                meta["children"] = merged
+                meta["series"] = series_title
+                self._write_metadata(parent_dir, meta)
+            except (FileNotFoundError, Exception):
+                pass
 
     def export_article_html(self, article_id: str) -> dict[str, Any]:
         article_dir = self.resolve_article_dir(article_id)
@@ -253,6 +309,9 @@ class ArticleStore:
             "sourceURL": metadata.get("source", ""),
             "directoryPath": str(article_dir),
             "htmlPath": str(html_path) if html_path.exists() else None,
+            "series": metadata.get("series"),
+            "parent": metadata.get("parent"),
+            "children": metadata.get("children", []),
         }
 
     def _load_metadata(self, article_dir: Path) -> dict[str, Any]:

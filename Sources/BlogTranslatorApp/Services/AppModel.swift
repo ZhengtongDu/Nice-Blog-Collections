@@ -26,6 +26,15 @@ final class AppModel: ObservableObject {
     @Published var completedArticleID: String?
     @Published var showDuplicateAlert = false
     @Published var duplicateArticles: [ArticleSummary] = []
+    @Published var translateMode: TranslateMode = .single
+    @Published var discoveredLinks: LinkDiscoveryResult?
+    @Published var selectedDiscoveredURLs: Set<String> = []
+    @Published var batchSeriesTitle = ""
+    @Published var activeBatch: BatchSnapshot?
+    @Published var batchJobStage = ""
+    @Published var batchJobPercent = 0
+    @Published var batchJobMessage = ""
+    @Published var isDiscovering = false
 
     private let storageRootKey = "BlogTranslatorApp.storageRoot"
     private let worker = WorkerClient()
@@ -340,6 +349,69 @@ final class AppModel: ObservableObject {
         }
     }
 
+    func discoverLinks() async {
+        let url = translationURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !url.isEmpty else { return }
+        isDiscovering = true
+        discoveredLinks = nil
+        selectedDiscoveredURLs = []
+
+        do {
+            let result: LinkDiscoveryResult = try await worker.request(
+                "discover_links",
+                params: ["url": url]
+            )
+            discoveredLinks = result
+            batchSeriesTitle = result.pageTitle
+            // Pre-select links that don't already exist
+            selectedDiscoveredURLs = Set(
+                result.links.filter { !$0.alreadyExists }.map(\.url)
+            )
+        } catch {
+            workerErrorMessage = error.localizedDescription
+        }
+        isDiscovering = false
+    }
+
+    func startBatchTranslation() async {
+        let urls = Array(selectedDiscoveredURLs)
+        guard !urls.isEmpty else { return }
+
+        do {
+            jobLogs = []
+            var params: [String: Any] = ["urls": urls]
+            if !batchSeriesTitle.isEmpty {
+                params["seriesTitle"] = batchSeriesTitle
+            }
+            let parentURL = translationURL.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !parentURL.isEmpty {
+                params["parentURL"] = parentURL
+            }
+
+            let result: BatchSnapshot = try await worker.request(
+                "start_batch_translation",
+                params: params
+            )
+            activeBatch = result
+            transientMessage = nil
+        } catch {
+            workerErrorMessage = error.localizedDescription
+        }
+    }
+
+    func cancelBatch() async {
+        guard let batch = activeBatch else { return }
+        do {
+            _ = try await worker.request(
+                "cancel_batch",
+                params: ["batchId": batch.batchId],
+                as: WorkerAcknowledgement.self
+            )
+        } catch {
+            workerErrorMessage = error.localizedDescription
+        }
+    }
+
     func pipelineState(for stage: PipelineStage) -> StageVisualState {
         guard let activeJob else { return .idle }
         if activeJob.state == "failed", activeJob.stage == stage.key {
@@ -412,6 +484,28 @@ final class AppModel: ObservableObject {
                 try await refreshArticles()
             } catch {
                 workerErrorMessage = error.localizedDescription
+            }
+        case "batch_progress":
+            if let snapshot = try? decoder.decode(BatchSnapshot.self, from: data) {
+                activeBatch = snapshot
+            }
+        case "batch_job_progress":
+            if let progress = try? decoder.decode(BatchJobProgress.self, from: data) {
+                batchJobStage = progress.stage
+                batchJobPercent = progress.percent
+                batchJobMessage = progress.message
+            }
+        case "batch_completed":
+            if let result = try? decoder.decode(BatchCompletedPayload.self, from: data) {
+                activeBatch = nil
+                batchJobStage = ""
+                batchJobPercent = 0
+                batchJobMessage = ""
+                discoveredLinks = nil
+                selectedDiscoveredURLs = []
+                translationURL = ""
+                transientMessage = "批量翻译完成：成功 \(result.succeeded) 篇，失败 \(result.failed) 篇"
+                try? await refreshArticles()
             }
         default:
             break

@@ -215,163 +215,17 @@ class TranslationJob:
             self.on_finish(self.job_id)
 
     def _execute_pipeline(self) -> Path:
-        self._advance("check_ollama", 2, "检查 Ollama 与模型状态")
-        health = probe_ollama(test_generate=False)
-        if not health["ollamaReachable"]:
-            raise RuntimeError(health["message"] or "Ollama 服务不可用")
-        if not health["modelInstalled"]:
-            raise RuntimeError(health["message"] or f"未安装模型 {OLLAMA_MODEL}")
-        self._log("Ollama 就绪")
+        def _set_output_dir(path: str):
+            self.snapshot.output_directory = path
 
-        self._ensure_not_cancelled()
-        self._advance("fetch", 12, f"爬取文章: {self.url}")
-        html_content = fetch_html(self.url)
-        soup = BeautifulSoup(html_content, "html.parser")
-        self._log("网页抓取完成")
-
-        self._ensure_not_cancelled()
-        self._advance("extract_metadata", 24, "提取文章元数据")
-        metadata = extract_metadata(soup, self.url)
-        slug = slug_from_url(self.url)
-        article_dir = self.store.create_article_dir(f"{date.today().isoformat()}-{slug}")
-        self.snapshot.output_directory = str(article_dir)
-        self._log(f"文章目录: {article_dir.name}")
-        self._log(f"标题: {metadata.get('title', 'Untitled')}")
-        self._log(f"作者: {metadata.get('author', 'Unknown')}")
-
-        self._ensure_not_cancelled()
-        self._advance("convert", 36, "转换原文为 Markdown 并下载图片")
-        original_md = html_to_markdown(html_content)
-        original_md = download_images(original_md, article_dir, self.url)
-
-        original_path = article_dir / "original.md"
-        original_path.write_text(f"# {metadata['title']}\n\n{original_md}", encoding="utf-8")
-
-        metadata["status"] = "pending"
-        meta_path = article_dir / "metadata.yaml"
-        with open(meta_path, "w", encoding="utf-8") as handle:
-            yaml.dump(metadata, handle, allow_unicode=True, default_flow_style=False)
-
-        self._ensure_not_cancelled()
-        sections = split_into_sections(original_md)
-        if not sections:
-            raise RuntimeError("文章正文为空，无法翻译")
-
-        self._advance("translate", 45, f"分段翻译，共 {len(sections)} 段")
-        translated_sections: list[dict[str, str]] = []
-
-        for index, section in enumerate(sections, start=1):
-            self._ensure_not_cancelled()
-            ratio = index / max(len(sections), 1)
-            percent = 45 + int(ratio * 25)
-            heading_preview = section["heading"][:40] if section["heading"] else "(开头)"
-            self._advance("translate", percent, f"翻译章节 {index}/{len(sections)}: {heading_preview}")
-            translated_sections.append(translate_section(section))
-            time.sleep(0.2)
-
-        full_original = "\n\n".join(
-            f"{section['original_heading']}\n\n{section['original_body']}"
-            for section in translated_sections
+        return run_single_translation(
+            url=self.url,
+            store=self.store,
+            advance=self._advance,
+            log=self._log,
+            ensure_not_cancelled=self._ensure_not_cancelled,
+            output_dir_callback=_set_output_dir,
         )
-        full_translated = "\n\n".join(
-            f"{section['heading']}\n\n{section['body']}" for section in translated_sections
-        )
-
-        raw_translated_path = article_dir / "raw_translated.md"
-        raw_translated_path.write_text(full_translated, encoding="utf-8")
-
-        self._ensure_not_cancelled()
-        self._advance("polish", 76, "使用 Ollama 润色与排版")
-        system_prompt = load_polish_prompt()
-        polished = self._polish_sections(system_prompt, full_original, full_translated, metadata)
-
-        self._ensure_not_cancelled()
-        self._advance("save", 92, "保存翻译结果与 HTML 预览")
-        translated_path = article_dir / "translated.md"
-        translated_path.write_text(polished, encoding="utf-8")
-        metadata["status"] = "translated"
-        with open(meta_path, "w", encoding="utf-8") as handle:
-            yaml.dump(metadata, handle, allow_unicode=True, default_flow_style=False)
-        self.store.export_article_html(article_dir.name)
-
-        self._log(f"原文: {original_path.name}")
-        self._log(f"机翻: {raw_translated_path.name}")
-        self._log(f"润色翻译: {translated_path.name}")
-        return article_dir
-
-    def _polish_sections(
-        self,
-        system_prompt: str,
-        original: str,
-        translated: str,
-        metadata: dict[str, Any],
-    ) -> str:
-        meta_header = (
-            f"- 原文标题：{metadata.get('title', '')}\n"
-            f"- 作者：{metadata.get('author', '')}\n"
-            f"- 原文链接：{metadata.get('source', '')}"
-        )
-
-        original_sections = re.split(r"(?=^## )", original, flags=re.MULTILINE)
-        translated_sections = re.split(r"(?=^## )", translated, flags=re.MULTILINE)
-
-        if len(original_sections) != len(translated_sections):
-            original_sections = [original]
-            translated_sections = [translated]
-
-        polished_parts: list[str] = []
-        total = len(original_sections)
-
-        for index, (original_section, translated_section) in enumerate(
-            zip(original_sections, translated_sections),
-            start=1,
-        ):
-            self._ensure_not_cancelled()
-            if not original_section.strip():
-                continue
-
-            progress = 76 + int((index / max(total, 1)) * 14)
-            self._advance("polish", progress, f"润色章节 {index}/{total}")
-
-            instructions: list[str] = []
-            if index == 1:
-                instructions.append("这是文章的第一部分，请在开头添加著作权声明和摘要。")
-            if index == total:
-                instructions.append("这是文章的最后一部分，请在末尾添加译者总结。")
-            if index != 1 and index != total:
-                instructions.append("这是文章的中间部分，不需要添加著作权声明、摘要或译者总结。")
-
-            instructions_text = '\n'.join(instructions)
-            user_prompt = (
-                "请按照系统提示中的规则润色以下章节。\n\n"
-                f"## 文章元数据\n{meta_header}\n\n"
-                f"## 位置说明\n{instructions_text}\n\n"
-                f"## 英文原文\n{original_section.strip()}\n\n"
-                f"## Google Translate 机翻结果\n{translated_section.strip()}\n\n"
-                "请输出润色后的内容（Markdown 格式）："
-            )
-
-            try:
-                response = requests.post(
-                    f"{OLLAMA_BASE_URL}/api/generate",
-                    json={
-                        "model": OLLAMA_MODEL,
-                        "prompt": user_prompt,
-                        "system": system_prompt,
-                        "stream": False,
-                        "think": False,
-                        "options": {"temperature": 0.3, "num_predict": 4096},
-                    },
-                    timeout=POLISH_TIMEOUT,
-                )
-                response.raise_for_status()
-                part = response.json().get("response", "").strip()
-                polished_parts.append(part or translated_section.strip())
-            except Exception as error:
-                self._log(f"[警告] 润色章节 {index} 失败，降级为机翻结果: {error}")
-                polished_parts.append(translated_section.strip())
-
-        return "\n\n".join(polished_parts).strip()
 
     def _advance(self, stage: str, percent: int, message: str):
         self.snapshot.stage = stage
@@ -396,3 +250,183 @@ class TranslationJob:
     def _ensure_not_cancelled(self):
         if self.cancel_event.is_set():
             raise JobCancelled()
+
+
+def run_single_translation(
+    url: str,
+    store: ArticleStore,
+    advance: Callable[[str, int, str], None],
+    log: Callable[[str], None],
+    ensure_not_cancelled: Callable[[], None],
+    output_dir_callback: Callable[[str], None] | None = None,
+) -> Path:
+    """Execute the full translation pipeline for a single URL.
+
+    This is the shared core used by both TranslationJob (single) and
+    BatchTranslationJob (batch).
+    """
+    advance("check_ollama", 2, "检查 Ollama 与模型状态")
+    health = probe_ollama(test_generate=False)
+    if not health["ollamaReachable"]:
+        raise RuntimeError(health["message"] or "Ollama 服务不可用")
+    if not health["modelInstalled"]:
+        raise RuntimeError(health["message"] or f"未安装模型 {OLLAMA_MODEL}")
+    log("Ollama 就绪")
+
+    ensure_not_cancelled()
+    advance("fetch", 12, f"爬取文章: {url}")
+    html_content = fetch_html(url)
+    soup = BeautifulSoup(html_content, "html.parser")
+    log("网页抓取完成")
+
+    ensure_not_cancelled()
+    advance("extract_metadata", 24, "提取文章元数据")
+    metadata = extract_metadata(soup, url)
+    slug = slug_from_url(url)
+    article_dir = store.create_article_dir(f"{date.today().isoformat()}-{slug}")
+    if output_dir_callback:
+        output_dir_callback(str(article_dir))
+    log(f"文章目录: {article_dir.name}")
+    log(f"标题: {metadata.get('title', 'Untitled')}")
+    log(f"作者: {metadata.get('author', 'Unknown')}")
+
+    ensure_not_cancelled()
+    advance("convert", 36, "转换原文为 Markdown 并下载图片")
+    original_md = html_to_markdown(html_content)
+    original_md = download_images(original_md, article_dir, url)
+
+    original_path = article_dir / "original.md"
+    original_path.write_text(f"# {metadata['title']}\n\n{original_md}", encoding="utf-8")
+
+    metadata["status"] = "pending"
+    meta_path = article_dir / "metadata.yaml"
+    with open(meta_path, "w", encoding="utf-8") as handle:
+        yaml.dump(metadata, handle, allow_unicode=True, default_flow_style=False)
+
+    ensure_not_cancelled()
+    sections = split_into_sections(original_md)
+    if not sections:
+        raise RuntimeError("文章正文为空，无法翻译")
+
+    advance("translate", 45, f"分段翻译，共 {len(sections)} 段")
+    translated_sections: list[dict[str, str]] = []
+
+    for index, section in enumerate(sections, start=1):
+        ensure_not_cancelled()
+        ratio = index / max(len(sections), 1)
+        percent = 45 + int(ratio * 25)
+        heading_preview = section["heading"][:40] if section["heading"] else "(开头)"
+        advance("translate", percent, f"翻译章节 {index}/{len(sections)}: {heading_preview}")
+        translated_sections.append(translate_section(section))
+        time.sleep(0.2)
+
+    full_original = "\n\n".join(
+        f"{section['original_heading']}\n\n{section['original_body']}"
+        for section in translated_sections
+    )
+    full_translated = "\n\n".join(
+        f"{section['heading']}\n\n{section['body']}" for section in translated_sections
+    )
+
+    raw_translated_path = article_dir / "raw_translated.md"
+    raw_translated_path.write_text(full_translated, encoding="utf-8")
+
+    ensure_not_cancelled()
+    advance("polish", 76, "使用 Ollama 润色与排版")
+    system_prompt = load_polish_prompt()
+    polished = _polish_sections_standalone(
+        system_prompt, full_original, full_translated, metadata,
+        advance, log, ensure_not_cancelled,
+    )
+
+    ensure_not_cancelled()
+    advance("save", 92, "保存翻译结果与 HTML 预览")
+    translated_path = article_dir / "translated.md"
+    translated_path.write_text(polished, encoding="utf-8")
+    metadata["status"] = "translated"
+    with open(meta_path, "w", encoding="utf-8") as handle:
+        yaml.dump(metadata, handle, allow_unicode=True, default_flow_style=False)
+    store.export_article_html(article_dir.name)
+
+    log(f"原文: {original_path.name}")
+    log(f"机翻: {raw_translated_path.name}")
+    log(f"润色翻译: {translated_path.name}")
+    return article_dir
+
+
+def _polish_sections_standalone(
+    system_prompt: str,
+    original: str,
+    translated: str,
+    metadata: dict[str, Any],
+    advance: Callable,
+    log: Callable,
+    ensure_not_cancelled: Callable,
+) -> str:
+    """Polish translated text section by section using Ollama."""
+    meta_header = (
+        f"- 原文标题：{metadata.get('title', '')}\n"
+        f"- 作者：{metadata.get('author', '')}\n"
+        f"- 原文链接：{metadata.get('source', '')}"
+    )
+
+    original_sections = re.split(r"(?=^## )", original, flags=re.MULTILINE)
+    translated_sections = re.split(r"(?=^## )", translated, flags=re.MULTILINE)
+
+    if len(original_sections) != len(translated_sections):
+        original_sections = [original]
+        translated_sections = [translated]
+
+    polished_parts: list[str] = []
+    total = len(original_sections)
+
+    for index, (original_section, translated_section) in enumerate(
+        zip(original_sections, translated_sections),
+        start=1,
+    ):
+        ensure_not_cancelled()
+        if not original_section.strip():
+            continue
+
+        progress = 76 + int((index / max(total, 1)) * 14)
+        advance("polish", progress, f"润色章节 {index}/{total}")
+
+        instructions: list[str] = []
+        if index == 1:
+            instructions.append("这是文章的第一部分，请在开头添加著作权声明和摘要。")
+        if index == total:
+            instructions.append("这是文章的最后一部分，请在末尾添加译者总结。")
+        if index != 1 and index != total:
+            instructions.append("这是文章的中间部分，不需要添加著作权声明、摘要或译者总结。")
+
+        instructions_text = '\n'.join(instructions)
+        user_prompt = (
+            "请按照系统提示中的规则润色以下章节。\n\n"
+            f"## 文章元数据\n{meta_header}\n\n"
+            f"## 位置说明\n{instructions_text}\n\n"
+            f"## 英文原文\n{original_section.strip()}\n\n"
+            f"## Google Translate 机翻结果\n{translated_section.strip()}\n\n"
+            "请输出润色后的内容（Markdown 格式）："
+        )
+
+        try:
+            response = requests.post(
+                f"{OLLAMA_BASE_URL}/api/generate",
+                json={
+                    "model": OLLAMA_MODEL,
+                    "prompt": user_prompt,
+                    "system": system_prompt,
+                    "stream": False,
+                    "think": False,
+                    "options": {"temperature": 0.3, "num_predict": 4096},
+                },
+                timeout=POLISH_TIMEOUT,
+            )
+            response.raise_for_status()
+            part = response.json().get("response", "").strip()
+            polished_parts.append(part or translated_section.strip())
+        except Exception as error:
+            log(f"[警告] 润色章节 {index} 失败，降级为机翻结果: {error}")
+            polished_parts.append(translated_section.strip())
+
+    return "\n\n".join(polished_parts).strip()

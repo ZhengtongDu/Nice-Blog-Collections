@@ -292,6 +292,45 @@ struct ArticleWorkspaceView: View {
                         }
                     }
 
+                    // Series info
+                    if let series = article.series, !series.isEmpty {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("系列")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Text(series)
+                                .font(.subheadline.weight(.medium))
+                        }
+                    }
+
+                    if let parentID = article.parent, !parentID.isEmpty {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("父文章")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Button(parentID) {
+                                selection.wrappedValue = parentID
+                            }
+                            .buttonStyle(.link)
+                            .font(.caption)
+                        }
+                    }
+
+                    if let children = article.children, !children.isEmpty {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("子文章 (\(children.count))")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            ForEach(children, id: \.self) { childID in
+                                Button(childID) {
+                                    selection.wrappedValue = childID
+                                }
+                                .buttonStyle(.link)
+                                .font(.caption)
+                            }
+                        }
+                    }
+
                     VStack(alignment: .leading, spacing: 10) {
                         ActionButton(title: "复制公众号富文本", systemImage: "doc.on.doc") {
                             Task { await model.copyCurrentArticleRichText() }

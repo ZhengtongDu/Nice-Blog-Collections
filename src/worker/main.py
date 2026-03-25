@@ -17,6 +17,8 @@ if str(REPO_ROOT / "src") not in sys.path:
 
 from worker.content_store import ArticleStore, default_storage_root
 from worker.translation_job import TranslationJob, probe_ollama
+from worker.link_discovery import discover_links
+from worker.batch_job import BatchTranslationJob
 
 
 class WorkerServer:
@@ -27,6 +29,7 @@ class WorkerServer:
         self.store = ArticleStore(storage_root)
         self._write_lock = threading.Lock()
         self._active_job: TranslationJob | None = None
+        self._active_batch: BatchTranslationJob | None = None
 
     def run(self):
         for raw_line in sys.stdin:
@@ -101,6 +104,8 @@ class WorkerServer:
         if command == "start_translation":
             if self._active_job and self._active_job.thread.is_alive():
                 raise RuntimeError("当前已有翻译任务正在进行中")
+            if self._active_batch and self._active_batch.thread.is_alive():
+                raise RuntimeError("当前已有批量翻译任务正在进行中")
             url = (params.get("url") or "").strip()
             if not url.startswith("http"):
                 raise ValueError("URL 必须以 http:// 或 https:// 开头")
@@ -163,6 +168,44 @@ class WorkerServer:
             self._send_event("articles_changed", {"reason": "article_deleted"})
             return result
 
+        if command == "discover_links":
+            url = (params.get("url") or "").strip()
+            if not url.startswith("http"):
+                raise ValueError("URL 必须以 http:// 或 https:// 开头")
+            return discover_links(url, self.store)
+
+        if command == "start_batch_translation":
+            if self._active_job and self._active_job.thread.is_alive():
+                raise RuntimeError("当前已有翻译任务正在进行中")
+            if self._active_batch and self._active_batch.thread.is_alive():
+                raise RuntimeError("当前已有批量翻译任务正在进行中")
+            urls = params.get("urls", [])
+            if not urls:
+                raise ValueError("缺少 urls 参数")
+            batch = BatchTranslationJob(
+                batch_id=str(uuid.uuid4()),
+                urls=urls,
+                store=self.store,
+                send_event=self._send_event,
+                on_finish=self._clear_active_batch,
+                series_title=params.get("seriesTitle"),
+                parent_url=params.get("parentURL"),
+            )
+            self._active_batch = batch
+            batch.start()
+            return {
+                "batchId": batch.batch_id,
+                "totalJobs": batch.total_jobs,
+                "state": "running",
+            }
+
+        if command == "cancel_batch":
+            batch_id = params.get("batchId")
+            if not self._active_batch or self._active_batch.batch_id != batch_id:
+                raise RuntimeError("未找到对应批量任务")
+            self._active_batch.cancel()
+            return {"batchId": batch_id, "accepted": True}
+
         if command == "export_article_html":
             article_id = params.get("articleId")
             if not article_id:
@@ -184,6 +227,10 @@ class WorkerServer:
     def _clear_active_job(self, job_id: str):
         if self._active_job and self._active_job.job_id == job_id:
             self._active_job = None
+
+    def _clear_active_batch(self, batch_id: str):
+        if self._active_batch and self._active_batch.batch_id == batch_id:
+            self._active_batch = None
 
 
 def main():
