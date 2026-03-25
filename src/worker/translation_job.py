@@ -54,6 +54,32 @@ from translate import (
 )
 from worker.content_store import ArticleStore
 
+GLOSSARY_PATH = Path(__file__).resolve().parent.parent / "prompts" / "glossary.yaml"
+
+
+def _load_glossary() -> dict[str, str]:
+    """Load the term glossary from YAML, returning {english: chinese}."""
+    if not GLOSSARY_PATH.exists():
+        return {}
+    try:
+        with open(GLOSSARY_PATH, encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
+
+
+def _glossary_prompt_section(glossary: dict[str, str]) -> str:
+    """Format glossary as a prompt section for injection into system prompt."""
+    if not glossary:
+        return ""
+    lines = [f"- {en} → {zh}" for en, zh in glossary.items()]
+    return (
+        "\n\n## 术语表\n"
+        "以下术语请统一使用指定的中文翻译：\n"
+        + "\n".join(lines)
+    )
+
 
 class JobCancelled(Exception):
     """Raised when a running translation job is cancelled."""
@@ -293,7 +319,7 @@ def run_single_translation(
     ensure_not_cancelled()
     advance("convert", 36, "转换原文为 Markdown 并下载图片")
     original_md = html_to_markdown(html_content)
-    original_md = download_images(original_md, article_dir, url)
+    original_md = download_images(original_md, article_dir, url, log_fn=log)
 
     original_path = article_dir / "original.md"
     original_path.write_text(f"# {metadata['title']}\n\n{original_md}", encoding="utf-8")
@@ -334,6 +360,10 @@ def run_single_translation(
     ensure_not_cancelled()
     advance("polish", 76, "使用 Ollama 润色与排版")
     system_prompt = load_polish_prompt()
+    glossary = _load_glossary()
+    if glossary:
+        system_prompt += _glossary_prompt_section(glossary)
+        log(f"已加载术语表（{len(glossary)} 条）")
     polished = _polish_sections_standalone(
         system_prompt, full_original, full_translated, metadata,
         advance, log, ensure_not_cancelled,
@@ -351,6 +381,12 @@ def run_single_translation(
     log(f"原文: {original_path.name}")
     log(f"机翻: {raw_translated_path.name}")
     log(f"润色翻译: {translated_path.name}")
+
+    # Quality check
+    warnings = _quality_check(polished)
+    for w in warnings:
+        log(f"[质量检查] {w}")
+
     return article_dir
 
 
@@ -430,3 +466,29 @@ def _polish_sections_standalone(
             polished_parts.append(translated_section.strip())
 
     return "\n\n".join(polished_parts).strip()
+
+
+def _quality_check(text: str) -> list[str]:
+    """Run lightweight quality checks on polished text. Returns warnings."""
+    warnings: list[str] = []
+
+    if "> 原文标题" not in text and "> 原文链接" not in text:
+        warnings.append("缺少著作权声明（> 原文标题 / > 原文链接）")
+
+    if "译者总结" not in text and "## 译者" not in text:
+        warnings.append("缺少译者总结章节")
+
+    # Check Chinese-English spacing: find patterns like "中文English" without space
+    spacing_issues = re.findall(r'[\u4e00-\u9fff][A-Za-z]|[A-Za-z][\u4e00-\u9fff]', text)
+    if len(spacing_issues) > 5:
+        warnings.append(f"中英文间距不规范（发现 {len(spacing_issues)} 处缺少空格）")
+
+    # Check for emoji
+    emoji_pattern = re.compile(
+        "[\U0001F600-\U0001F64F\U0001F300-\U0001F5FF\U0001F680-\U0001F6FF"
+        "\U0001F1E0-\U0001F1FF\U00002702-\U000027B0\U0001F900-\U0001F9FF]"
+    )
+    if emoji_pattern.search(text):
+        warnings.append("文中包含 emoji，polish prompt 要求禁止使用")
+
+    return warnings

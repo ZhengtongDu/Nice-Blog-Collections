@@ -12,7 +12,7 @@ import requests
 from config import USER_AGENT
 
 
-def download_images(markdown: str, article_dir: Path, base_url: str) -> str:
+def download_images(markdown: str, article_dir: Path, base_url: str, log_fn=None) -> str:
     """
     下载 Markdown 中的图片到本地
 
@@ -20,6 +20,7 @@ def download_images(markdown: str, article_dir: Path, base_url: str) -> str:
         markdown: 原始 Markdown 内容
         article_dir: 文章目录（如 articles/2026-03-23-slug/）
         base_url: 原文 URL（用于解析相对路径）
+        log_fn: 可选的日志回调函数
 
     Returns:
         替换后的 Markdown（图片链接改为本地路径）
@@ -29,6 +30,11 @@ def download_images(markdown: str, article_dir: Path, base_url: str) -> str:
 
     # 正则匹配 ![alt](url)
     pattern = r'!\[([^\]]*)\]\(([^)]+)\)'
+
+    # Pre-scan to count images
+    matches = list(re.finditer(pattern, markdown))
+    total_images = sum(1 for m in matches if not m.group(2).startswith('data:'))
+    downloaded = [0]
 
     def replace_image(match):
         alt, url = match.groups()
@@ -43,10 +49,18 @@ def download_images(markdown: str, article_dir: Path, base_url: str) -> str:
         try:
             # 下载图片
             filename = download_single_image(full_url, images_dir)
+            downloaded[0] += 1
+            if log_fn and total_images > 0:
+                log_fn(f"下载图片 {downloaded[0]}/{total_images}: {filename}")
             # 返回本地路径
             return f'![{alt}](images/{filename})'
         except Exception as e:
-            print(f"  [警告] 图片下载失败: {url} - {e}")
+            downloaded[0] += 1
+            msg = f"[警告] 图片下载失败: {url} - {e}"
+            if log_fn:
+                log_fn(msg)
+            else:
+                print(f"  {msg}")
             # 保留原链接
             return match.group(0)
 
