@@ -19,6 +19,7 @@ final class AppModel: ObservableObject {
     @Published var jobLogs: [JobLogItem] = []
     @Published var librarySearch = ""
     @Published var libraryFilter: ArticleStatus?
+    @Published var librarySort = "added_desc"
     @Published var workerErrorMessage: String?
     @Published var transientMessage: String?
     @Published var previewReloadToken = UUID()
@@ -123,7 +124,11 @@ final class AppModel: ObservableObject {
     }
 
     func refreshArticles() async throws {
-        allArticles = try await worker.request("list_articles", as: [ArticleSummary].self)
+        allArticles = try await worker.request(
+            "list_articles",
+            params: ["sort": librarySort],
+            as: [ArticleSummary].self
+        )
     }
 
     func selectLibraryArticle(_ articleID: String?) {

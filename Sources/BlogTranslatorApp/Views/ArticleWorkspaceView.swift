@@ -1,5 +1,23 @@
 import SwiftUI
 
+enum LibrarySortOption: String, CaseIterable, Identifiable {
+    case addedDesc = "added_desc"
+    case addedAsc = "added_asc"
+    case nameAsc = "name_asc"
+    case nameDesc = "name_desc"
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .addedDesc: return "最新优先"
+        case .addedAsc: return "最旧优先"
+        case .nameAsc: return "文件名 A-Z"
+        case .nameDesc: return "文件名 Z-A"
+        }
+    }
+}
+
 enum ArticleWorkspaceKind {
     case library
     case reviewQueue
@@ -103,6 +121,19 @@ struct ArticleWorkspaceView: View {
                     }
                 }
                 .pickerStyle(.segmented)
+
+                Picker("排序", selection: Binding<String>(
+                    get: { model.librarySort },
+                    set: { newValue in
+                        model.librarySort = newValue
+                        Task { try? await model.refreshArticles() }
+                    }
+                )) {
+                    ForEach(LibrarySortOption.allCases) { option in
+                        Text(option.title).tag(option.rawValue)
+                    }
+                }
+                .pickerStyle(.menu)
             } else {
                 Text("聚焦所有 `status=translated` 的文章。")
                     .foregroundStyle(.secondary)
